@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.Game;
 
 public class App extends Application {
 
@@ -15,7 +16,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        // launch();
+        // System.out.println("test");
+        Game newGame = new Game();
     }
 
 }
