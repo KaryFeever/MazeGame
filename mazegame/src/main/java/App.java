@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+
 
 
 public class App extends Application {
@@ -19,11 +21,26 @@ public void start(Stage primaryStage) throws Exception {
         startGame();
     });
 
-    StackPane startLayout = new StackPane(startButton);
-    Scene startScene = new Scene(startLayout, 640, 480);
+    Button exitButton = new Button("Exit");
+        exitButton.setOnAction(event -> {
+            primaryStage.close();
+        });
+    
+
+    // StackPane startLayout = new StackPane(startButton, exitButton);
+    // Scene startScene = new Scene(startLayout, 640, 480);
+     // Create a VBox to hold the buttons
+     VBox vbox = new VBox();
+     vbox.getChildren().addAll(startButton, exitButton);
+     vbox.setSpacing(20); // Add spacing between buttons
+ 
+     // Create a StackPane to hold the VBox and center it
+     StackPane startLayout = new StackPane(vbox);
+     startLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+     startLayout.setPrefSize(640, 480);
 
     // Show the start screen
-    primaryStage.setScene(startScene);
+    primaryStage.setScene(new Scene(startLayout));
     primaryStage.show();
 }
 
