@@ -1,9 +1,12 @@
 import controller.GameController;
 import controller.MapParser;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Game;
@@ -53,20 +56,27 @@ public void start(Stage primaryStage) throws Exception {
 }
 
 private void startGame(Map map) {
-    final int WIDTH = 640;
-    final int HEIGHT = 480;
+    final int WIDTH = 1024;
+    final int HEIGHT = 960;
 
     Game game = new Game(map);
     GameController gameController = new GameController(game);
-    Canvas canvas = new Canvas(800, 800);
-    GameView gameView = new GameView(canvas, map, gameController);
+    Canvas GameCanvas = new Canvas(800, 800);
+    Canvas HUDCanvas = new Canvas(800, 64);
+    
+    GameView gameView = new GameView(GameCanvas, HUDCanvas, map, gameController);
     gameView.draw();
     map.printMap();
 
+    VBox vbox = new VBox(HUDCanvas, GameCanvas);
+
+    StackPane root = new StackPane(vbox);
+    root.setAlignment(Pos.CENTER);
+    Scene scene = new Scene(root, 800, 864);
     // set up the UI
-    BorderPane root = new BorderPane();
-    root.setCenter(canvas);
-    Scene scene = new Scene(root, WIDTH, HEIGHT);
+    // BorderPane root = new BorderPane();
+    // root.setCenter(vbox);
+    // Scene scene = new Scene(root, WIDTH, HEIGHT);
 
     scene.setOnKeyPressed(gameController::handleKeyPress);
 

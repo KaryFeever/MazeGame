@@ -8,6 +8,7 @@ public class PacMan implements GameObject {
     private int col;
     private boolean keyFlag = false;
     private Map map;
+    private int lives = 3;
 
     public PacMan(Map map, int row, int col) {
         this.map = map;
@@ -84,6 +85,14 @@ public class PacMan implements GameObject {
 
     public void setKeyFlag(boolean keyFlag) {
         this.keyFlag = keyFlag;
+    }
+
+    public void reduceLives() {
+        this.lives--;
+    }
+
+    public int getLives() {
+        return this.lives;
     }
 
     

@@ -61,4 +61,20 @@ public class Game {
         return this.ghosts;
     }
 
+    public PacMan getPacMan() {
+        return this.pacMan;
+    }
+
+    public Key getKey() {
+        return this.key;
+    }
+
+    public Target getTarget() {
+        return this.target;
+    }
+
+    public Map getMap() {
+        return this.map;
+    }
+
 }
