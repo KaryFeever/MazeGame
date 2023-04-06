@@ -1,11 +1,15 @@
 package model.terrain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import interfaces.GameObject;
 import interfaces.Terrain;
+import model.Game;
 
 public class Field implements Terrain {
     private boolean emptyFlag = true;
-    private GameObject object;
+    private List<GameObject> objects = new ArrayList<GameObject>();
 
 
     @Override
@@ -19,25 +23,24 @@ public class Field implements Terrain {
     }
 
     @Override
-    public GameObject getObject() {
-        return object;
+    public List<GameObject> getObject() {
+        return this.objects;
     }
 
     @Override
     public boolean putObject(GameObject object) {
-        if(isEmpty()) {
-            this.object = object;
-            emptyFlag = false;
-            return true;
-        }
-        return false;
+        this.objects.add(object);
+        emptyFlag = false;
+        return true;
     }
 
     @Override
-    public boolean removeObject() {
+    public boolean removeObject(GameObject object) {
         if(!isEmpty()) {
-            this.object = null;
-            emptyFlag = true;
+            this.objects.remove(object);
+            if(this.objects.isEmpty()) {
+                emptyFlag = true;
+            }
             return true;
         }
         return false;

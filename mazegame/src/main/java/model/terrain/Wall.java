@@ -1,5 +1,7 @@
 package model.terrain;
 
+import java.util.List;
+
 import interfaces.GameObject;
 import interfaces.Terrain;
 
@@ -16,7 +18,7 @@ public class Wall implements Terrain {
     }
 
     @Override
-    public GameObject getObject() {
+    public List<GameObject> getObject() {
         return null;
     }
 
@@ -26,7 +28,7 @@ public class Wall implements Terrain {
     }
 
     @Override
-    public boolean removeObject() {
+    public boolean removeObject(GameObject object) {
         return false;
     }
     

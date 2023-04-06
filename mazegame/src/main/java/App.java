@@ -62,7 +62,7 @@ private void startGame(Map map) {
 
     Game game = new Game(map);
     GameController gameController = new GameController(game);
-    Canvas canvas = new Canvas(400, 400);
+    Canvas canvas = new Canvas(800, 800);
     GameView gameView = new GameView(canvas, map, gameController);
     gameView.draw();
     map.printMap();

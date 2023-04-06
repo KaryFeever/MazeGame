@@ -34,19 +34,23 @@ public class Game {
                 if(map.getMapField(row, col).getClass() == Field.class) {
                     if(map.getMapField(row, col).isEmpty()) {
                         continue;
+                    } else {
+                        for(GameObject object : map.getMapField(row, col).getObject()) {
+                            if(object.getClass() == PacMan.class) {
+                                pacMan = (PacMan) object;
+                            }
+                            if(object.getClass() == Ghost.class) {
+                                ghosts.add((Ghost) object); 
+                            }
+                            if(object.getClass() == Key.class) {
+                                key = (Key) object;
+                            }
+                            if(object.getClass() == Target.class) {
+                                target = (Target) object;
+                            }
+                        }
                     }
-                    if(map.getMapField(row, col).getObject().getClass() == PacMan.class) {
-                        pacMan = (PacMan) map.getMapField(row, col).getObject();
-                    }
-                    if(map.getMapField(row, col).getObject().getClass() == Ghost.class) {
-                        ghosts.add((Ghost) map.getMapField(row, col).getObject()); 
-                    }
-                    if(map.getMapField(row, col).getObject().getClass() == Key.class) {
-                        key = (Key) map.getMapField(row, col).getObject();
-                    }
-                    if(map.getMapField(row, col).getObject().getClass() == Target.class) {
-                        target = (Target) map.getMapField(row, col).getObject();
-                    }
+                    
                 }
             }
         }

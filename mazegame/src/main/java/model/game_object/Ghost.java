@@ -10,6 +10,8 @@ public class Ghost implements GameObject {
     private int col;
     private Map map;
     private Directions direction;
+    private int stepCounter = 0;
+    private int changeDirection = new Random().nextInt(4) + 1;
 
 
     public Ghost(Map map, int row, int col, Directions direction) {
@@ -62,10 +64,15 @@ public class Ghost implements GameObject {
                     rowMove = 1;
                     break;
             }
-            map.getMapField(row, col).removeObject();
+            map.getMapField(row, col).removeObject(this);
             this.row += rowMove;
             this.col += colMove;
             map.getMapField(this.row, this.col ).putObject(this);
+            stepCounter++;
+            if(stepCounter == changeDirection) {
+                this.direction = Directions.values()[new Random().nextInt(Directions.values().length)];        
+                stepCounter = 0;
+            }
             return true;
         }
         this.direction = Directions.values()[new Random().nextInt(Directions.values().length)];

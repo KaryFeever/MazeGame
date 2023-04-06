@@ -1,9 +1,11 @@
 package interfaces;
 
+import java.util.List;
+
 public interface Terrain {
     boolean isEmpty();
     boolean isPassable();
-    GameObject getObject();
+    List<GameObject> getObject();
     boolean putObject(GameObject object);
-    boolean removeObject();
+    boolean removeObject(GameObject object);
 }

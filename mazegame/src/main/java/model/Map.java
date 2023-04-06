@@ -1,5 +1,6 @@
 package model;
 
+import interfaces.GameObject;
 import interfaces.Terrain;
 import model.game_object.Ghost;
 import model.game_object.Key;
@@ -59,19 +60,21 @@ public class Map {
                 if(mapField[row][col].getClass() == Wall.class) {
                     System.out.print("#");
                 } else if (mapField[row][col].getClass() == Field.class) {
-                        if (mapField[row][col].getObject() == null) {
+                        if (mapField[row][col].getObject().isEmpty()) {
                             System.out.print(".");
                         } else { 
-                            if(mapField[row][col].getObject().getClass() == PacMan.class) {
-                            System.out.print("C");
-                        } else if (mapField[row][col].getObject().getClass() == Ghost.class) {
-                            System.out.print("^");
-                        } else if (mapField[row][col].getObject().getClass() == Target.class) {
-                            System.out.print("T");
-                        } else if (mapField[row][col].getObject().getClass() == Key.class) {
-                            System.out.print("K");
+                            for(GameObject object : mapField[row][col].getObject()) {
+                                if(object.getClass() == PacMan.class) {
+                                    System.out.print("C");
+                                } else if (object.getClass() == Ghost.class) {
+                                    System.out.print("^");
+                                } else if (object.getClass() == Target.class) {
+                                    System.out.print("T");
+                                } else if (object.getClass() == Key.class) {
+                                    System.out.print("K");
+                                }
+                            }
                         }
-                    }
                 }
             }
             System.out.println();
