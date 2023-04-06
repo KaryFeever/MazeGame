@@ -3,9 +3,11 @@ package controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import interfaces.Terrain;
+import interfaces.GameObject.Directions;
 import model.Map;
 import model.game_object.Ghost;
 import model.game_object.Key;
@@ -79,7 +81,7 @@ public class MapParser {
                     break;
                 case 'G': // ghost
                     newTerrain = new Field();
-                    newTerrain.putObject(new Ghost(map, rowIndex + 1, col + 1));
+                    newTerrain.putObject(new Ghost(map, rowIndex + 1, col + 1, Directions.RIGHT));
                     break;
                 case 'K': // key
                     newTerrain = new Field();

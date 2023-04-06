@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,32 +25,34 @@ public class GameView {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private Map map;
+    private GameController controller;
 
-    public GameView(Canvas canvas, Map map) {
+    public GameView(Canvas canvas, Map map, GameController controller) {
         this.canvas = canvas;
         this.map = map;
         this.graphicsContext = canvas.getGraphicsContext2D();
+        this.controller = controller;
     }
 
     public void draw() {
         for(int row = 0; row < map.getRows(); row++) {
             for(int col = 0; col < map.getCols(); col++) {
                 if(map.getMapField(row, col).getClass() == Wall.class) {
-                    graphicsContext.drawImage(new Image(WALL_IMAGE_PATH), row*SPRITE_SIZE, col*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+                    graphicsContext.drawImage(new Image(WALL_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                 } else {
-                    graphicsContext.drawImage(new Image(FIELD_IMAGE_PATH), row*SPRITE_SIZE, col*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+                    graphicsContext.drawImage(new Image(FIELD_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                     if(!map.getMapField(row, col).isEmpty()) {
                         if(map.getMapField(row, col).getObject().getClass() == PacMan.class) {
-                            graphicsContext.drawImage(new Image(PACMAN_IMAGE_PATH), row*SPRITE_SIZE, col*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+                            graphicsContext.drawImage(new Image(PACMAN_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                         }
                         if(map.getMapField(row, col).getObject().getClass() == Ghost.class) {
-                            graphicsContext.drawImage(new Image(GHOST_IMAGE_PATH), row*SPRITE_SIZE, col*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+                            graphicsContext.drawImage(new Image(GHOST_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                         }
                         if(map.getMapField(row, col).getObject().getClass() == Target.class) {
-                            graphicsContext.drawImage(new Image(TARGET_IMAGE_PATH), row*SPRITE_SIZE, col*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+                            graphicsContext.drawImage(new Image(TARGET_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                         }
                         if(map.getMapField(row, col).getObject().getClass() == Key.class) {
-                            graphicsContext.drawImage(new Image(KEY_IMAGE_PATH), row*SPRITE_SIZE, col*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+                            graphicsContext.drawImage(new Image(KEY_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                         }
                     }
                 }
@@ -58,10 +61,21 @@ public class GameView {
     }
 
     public void updateGameView() {
+        final long[] startTime = { System.nanoTime() };
+        long INTERVAL = 100000000; // 50 milliseconds
+
+
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                draw();
+                long elapsedTime = now - startTime[0];
+                if (elapsedTime >= INTERVAL) {
+                    draw();
+                    controller.updateGameState();
+                    startTime[0] = now;
+                }
+                // draw();
+                // controller.updateGameState();
             }
         }.start();;
     }

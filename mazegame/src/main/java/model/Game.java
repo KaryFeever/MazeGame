@@ -56,4 +56,8 @@ public class Game {
         pacMan.move(direction);
     }
 
+    public List<Ghost> getGhosts() {
+        return this.ghosts;
+    }
+
 }

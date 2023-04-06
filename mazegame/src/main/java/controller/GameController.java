@@ -4,6 +4,7 @@ import interfaces.GameObject.Directions;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Game;
+import model.game_object.Ghost;
 
 public class GameController {
     private Game game;
@@ -29,6 +30,12 @@ public class GameController {
             default:
                 break;
 
+        }
+    }
+
+    public void updateGameState() {
+        for(Ghost ghost : game.getGhosts()) {
+            ghost.move(null);
         }
     }
     

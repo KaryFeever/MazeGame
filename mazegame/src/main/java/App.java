@@ -63,8 +63,9 @@ private void startGame(Map map) {
     Game game = new Game(map);
     GameController gameController = new GameController(game);
     Canvas canvas = new Canvas(400, 400);
-    GameView gameView = new GameView(canvas, map);
+    GameView gameView = new GameView(canvas, map, gameController);
     gameView.draw();
+    map.printMap();
 
     // set up the UI
     BorderPane root = new BorderPane();
