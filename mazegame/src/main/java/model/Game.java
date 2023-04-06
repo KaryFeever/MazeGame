@@ -1,10 +1,8 @@
 package model;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.MapParser;
 import interfaces.GameObject;
 import interfaces.GameObject.Directions;
 import model.game_object.Ghost;
@@ -12,7 +10,6 @@ import model.game_object.Key;
 import model.game_object.PacMan;
 import model.game_object.Target;
 import model.terrain.Field;
-import model.terrain.Wall;
 
 public class Game {
     private Map map;

@@ -1,7 +1,6 @@
 package controller;
 
 import interfaces.GameObject.Directions;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Game;
 import model.game_object.Ghost;

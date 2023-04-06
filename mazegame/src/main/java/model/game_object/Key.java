@@ -1,7 +1,6 @@
 package model.game_object;
 
 import interfaces.GameObject;
-import model.Map;
 
 public class Key implements GameObject {
     private int row;

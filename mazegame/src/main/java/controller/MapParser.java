@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 import interfaces.Terrain;
@@ -125,7 +124,6 @@ public class MapParser {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return map;

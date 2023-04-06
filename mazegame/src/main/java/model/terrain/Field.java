@@ -5,7 +5,6 @@ import java.util.List;
 
 import interfaces.GameObject;
 import interfaces.Terrain;
-import model.Game;
 
 public class Field implements Terrain {
     private boolean emptyFlag = true;

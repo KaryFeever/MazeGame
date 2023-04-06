@@ -1,11 +1,8 @@
 import controller.GameController;
 import controller.MapParser;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -18,7 +15,6 @@ import javafx.scene.layout.VBox;
 
 
 public class App extends Application {
-    private boolean started = false;
 
 @Override
 public void start(Stage primaryStage) throws Exception {

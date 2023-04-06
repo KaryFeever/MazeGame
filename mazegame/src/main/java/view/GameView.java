@@ -6,8 +6,6 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import model.Game;
 import model.Map;
 import model.game_object.Ghost;
 import model.game_object.Key;
@@ -74,10 +72,11 @@ public class GameView {
             public void handle(long now) {
                 long elapsedTime = now - startTime[0];
                 if (elapsedTime >= INTERVAL) {
-                    draw();
+                    // draw();
                     controller.updateGameState();
                     startTime[0] = now;
                 }
+                draw();
                 // draw();
                 // controller.updateGameState();
             }
