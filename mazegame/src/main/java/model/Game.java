@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import controller.MapParser;
 import interfaces.GameObject;
@@ -14,62 +15,45 @@ import model.terrain.Field;
 import model.terrain.Wall;
 
 public class Game {
-    private ArrayList<Map> maps = new ArrayList<Map>();
-    private Map selectedMap;
-    private File directory = new File("data/maps");
+    private Map map;
+    private PacMan pacMan;
+    private List<Ghost> ghosts;
+    private Key key;
+    private Target target;
 
-    public Game() {
-        configureMaps();
-        printMap();
-        GameObject pacMan = maps.get(0).getMapField(9, 1).getObject();
-        pacMan.move(Directions.RIGHT);
-        System.out.println();
-        printMap();
-        pacMan.move(Directions.RIGHT);
-        System.out.println();
-        printMap();
-        pacMan.move(Directions.RIGHT);
-        System.out.println();
+    public Game(Map map) {
+        this.map = map;
+        this.ghosts = new ArrayList<Ghost>();
+        this.initializeObjects();
+
     }
 
-    
-    private void printMap() {
-        for(int row = 0; row < maps.get(0).getRows(); row++) {
-            for(int col = 0; col < maps.get(0).getCols(); col++) {
-                if(maps.get(0).getMapField(row, col).getClass() == Wall.class) {
-                    System.out.print("#");
-                } else if (maps.get(0).getMapField(row, col).getClass() == Field.class) {
-                        if (maps.get(0).getMapField(row, col).getObject() == null) {
-                            System.out.print(".");
-                        } else { 
-                            if(maps.get(0).getMapField(row, col).getObject().getClass() == PacMan.class) {
-                            System.out.print("C");
-                        } else if (maps.get(0).getMapField(row, col).getObject().getClass() == Ghost.class) {
-                            System.out.print("^");
-                        } else if (maps.get(0).getMapField(row, col).getObject().getClass() == Target.class) {
-                            System.out.print("T");
-                        } else if (maps.get(0).getMapField(row, col).getObject().getClass() == Key.class) {
-                            System.out.print("K");
-                        }
+    private void initializeObjects() {
+        for(int row = 0; row < map.getRows(); row++) {
+            for(int col = 0; col < map.getCols(); col++) {
+                if(map.getMapField(row, col).getClass() == Field.class) {
+                    if(map.getMapField(row, col).isEmpty()) {
+                        continue;
+                    }
+                    if(map.getMapField(row, col).getObject().getClass() == PacMan.class) {
+                        pacMan = (PacMan) map.getMapField(row, col).getObject();
+                    }
+                    if(map.getMapField(row, col).getObject().getClass() == Ghost.class) {
+                        ghosts.add((Ghost) map.getMapField(row, col).getObject()); 
+                    }
+                    if(map.getMapField(row, col).getObject().getClass() == Key.class) {
+                        key = (Key) map.getMapField(row, col).getObject();
+                    }
+                    if(map.getMapField(row, col).getObject().getClass() == Target.class) {
+                        target = (Target) map.getMapField(row, col).getObject();
                     }
                 }
             }
-            System.out.println();
         }
     }
 
-    private void configureMaps() {
-        MapParser parser = new MapParser();
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                Map map = parser.parseMap(file);
-                if(map != null) {
-                    maps.add(map);
-                }
-            }
-        }
+    public void movePacman(Directions direction) {
+        pacMan.move(direction);
     }
-    
 
 }

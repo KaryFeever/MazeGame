@@ -1,6 +1,11 @@
 package model;
 
 import interfaces.Terrain;
+import model.game_object.Ghost;
+import model.game_object.Key;
+import model.game_object.PacMan;
+import model.game_object.Target;
+import model.terrain.Field;
 import model.terrain.Wall;
 
 public class Map {
@@ -46,6 +51,31 @@ public class Map {
             return true;
         }
         return false;
+    }
+
+    public void printMap() {
+        for(int row = 0; row < rows; row++) {
+            for(int col = 0; col < cols; col++) {
+                if(mapField[row][col].getClass() == Wall.class) {
+                    System.out.print("#");
+                } else if (mapField[row][col].getClass() == Field.class) {
+                        if (mapField[row][col].getObject() == null) {
+                            System.out.print(".");
+                        } else { 
+                            if(mapField[row][col].getObject().getClass() == PacMan.class) {
+                            System.out.print("C");
+                        } else if (mapField[row][col].getObject().getClass() == Ghost.class) {
+                            System.out.print("^");
+                        } else if (mapField[row][col].getObject().getClass() == Target.class) {
+                            System.out.print("T");
+                        } else if (mapField[row][col].getObject().getClass() == Key.class) {
+                            System.out.print("K");
+                        }
+                    }
+                }
+            }
+            System.out.println();
+        }
     }
 
     
