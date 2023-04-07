@@ -29,6 +29,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+       Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         this.stage = primaryStage;
 
         // Process Maps from the file
@@ -37,13 +38,14 @@ public class App extends Application {
 
         // Create the start screen
         Button startButton = new Button("New game");
+        startButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
         startButton.setOnAction(event -> {
             // startGame(mapParser.getMap(0));
             // Create the playback screen
             VBox startLayout = new VBox();
             // Set alignment of startLayout to center
             startLayout.setAlignment(Pos.CENTER);
-            startLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+            startLayout.setStyle("-fx-background-color: #ebebeb;"); // Set background color
             startLayout.setPrefSize(640, 480);
             startLayout.setAlignment(Pos.CENTER);
 
@@ -65,11 +67,13 @@ public class App extends Application {
 
             // Create buttons
             Button saveButton = new Button("Play");
+            saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
             saveButton.setOnAction(event_save -> {
                 startGame(mapParser.getMap(0)); // Set the start screen layout as the scene
             });
 
             Button backButton = new Button("Back");
+            backButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
             backButton.setOnAction(event_back -> {
                 stage.setScene(startScene); // Set the start screen layout as the scene
             });
@@ -92,7 +96,7 @@ public class App extends Application {
             settingsButton.setOnAction(event -> {
             // Create the settings screen
             VBox settingsLayout = new VBox();
-            settingsLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+            settingsLayout.setStyle("-fx-background-color: #ebebeb;"); // Set background color
             settingsLayout.setPrefSize(640, 480);
             settingsLayout.setAlignment(Pos.CENTER);
 
@@ -158,11 +162,13 @@ public class App extends Application {
 
             // Create buttons
             Button saveButton = new Button("Save");
+            saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
             saveButton.setOnAction(event_save -> {
                 stage.setScene(startScene); // Set the start screen layout as the scene
             });
     
             Button backButton = new Button("Back");
+            backButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
             backButton.setOnAction(event_back -> {
                 stage.setScene(startScene); // Set the start screen layout as the scene
             });
@@ -186,7 +192,7 @@ public class App extends Application {
             VBox playbackLayout = new VBox();
             // Set alignment of playbackLayout to center
             playbackLayout.setAlignment(Pos.CENTER);
-            playbackLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+            playbackLayout.setStyle("-fx-background-color: #ebebeb;"); // Set background color
             playbackLayout.setPrefSize(640, 480);
             playbackLayout.setAlignment(Pos.CENTER);
 
@@ -226,11 +232,13 @@ public class App extends Application {
 
             // Create buttons
             Button saveButton = new Button("Play");
+            saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
             saveButton.setOnAction(event_save -> {
                 stage.setScene(startScene); // Set the start screen layout as the scene
             });
     
             Button backButton = new Button("Back");
+            backButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
             backButton.setOnAction(event_back -> {
                 stage.setScene(startScene); // Set the start screen layout as the scene
             });
@@ -249,6 +257,7 @@ public class App extends Application {
         });
 
         Button exitButton = new Button("Exit");
+        exitButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
         exitButton.setOnAction(event -> {
             stage.close();
         });
@@ -263,7 +272,7 @@ public class App extends Application {
 
         // Create a StackPane to hold the VBox and center it
         StackPane startLayout = new StackPane(vbox);
-        startLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+        startLayout.setStyle("-fx-background-color: #ebebeb;"); // Set background color
         startLayout.setPrefSize(640, 480);
 
         // Save the start screen layout as a scene
