@@ -54,31 +54,34 @@ public class Map {
         return false;
     }
 
-    public void printMap() {
-        for(int row = 0; row < rows; row++) {
-            for(int col = 0; col < cols; col++) {
+    public String printMap() {
+        String mapString = "" + (rows - 2) + " " + (cols - 2) + "\n";
+        for(int row = 1; row < rows - 1; row++) {
+            for(int col = 1; col < cols - 1; col++) {
                 if(mapField[row][col].getClass() == Wall.class) {
-                    System.out.print("#");
+                    // System.out.print("#");
+                    mapString += "#";
                 } else if (mapField[row][col].getClass() == Field.class) {
                         if (mapField[row][col].getObject().isEmpty()) {
-                            System.out.print(".");
+                            mapString += ".";
                         } else { 
                             for(GameObject object : mapField[row][col].getObject()) {
                                 if(object.getClass() == PacMan.class) {
-                                    System.out.print("C");
+                                    mapString += "S";
                                 } else if (object.getClass() == Ghost.class) {
-                                    System.out.print("^");
+                                    mapString += "G";
                                 } else if (object.getClass() == Target.class) {
-                                    System.out.print("T");
+                                    mapString += "T";
                                 } else if (object.getClass() == Key.class) {
-                                    System.out.print("K");
+                                    mapString += "K";
                                 }
                             }
                         }
                 }
             }
-            System.out.println();
+            mapString += "\n";
         }
+        return mapString;
     }
 
     

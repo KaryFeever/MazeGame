@@ -7,10 +7,14 @@ import model.game_object.Ghost;
 
 public class GameController {
     private Game game;
+    private GameLogs gameLogs;
     private int invulnerabilityCounter = 5;
+    private boolean flag = true;
 
-    public GameController(Game game) {
+    public GameController(Game game, GameLogs gameLogs) {
         this.game = game;
+        this.gameLogs = gameLogs;
+        this.gameLogs.createLog(game.getMap().printMap());
     }
 
     public void handleKeyPress(KeyEvent event) {
@@ -35,7 +39,9 @@ public class GameController {
 
     public void updateGameState() {
         for(Ghost ghost : game.getGhosts()) {
-            ghost.move(null);
+            if(ghost.move(null)) {
+                gameLogs.getLog().addStep(game.getPacMan(), game.getGhosts());
+            }
             checkIntersection();
         }
     }
@@ -50,6 +56,11 @@ public class GameController {
                 }
                 if(game.getPacMan().getLives() <= 0) {
                     System.out.println("GAME OVER");
+                    if(flag) {
+                        gameLogs.saveLog();
+                        flag = false;
+                    }
+                    
                 }
                 
             }
@@ -66,6 +77,10 @@ public class GameController {
         if((game.getPacMan().getCol() == game.getTarget().getCol()) && (game.getPacMan().getRow() == game.getTarget().getRow())) {
             if(game.getPacMan().isKeyFlag()) {
                 System.out.println("WIN");
+                if(flag) {
+                    gameLogs.saveLog();
+                    flag = false;
+                }
             }
         }
         invulnerabilityCounter++;
