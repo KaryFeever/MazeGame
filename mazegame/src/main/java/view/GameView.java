@@ -14,8 +14,8 @@ import model.game_object.Target;
 import model.terrain.Wall;
 
 public class GameView {
-    private static final String WALL_IMAGE_PATH = "/wall.png";
-    private static final String FIELD_IMAGE_PATH = "/field.png";
+    private static final String WALL_IMAGE_PATH = "/wall.jpg";
+    private static final String FIELD_IMAGE_PATH = "/field.jpg";
     private static final String GHOST_IMAGE_PATH = "/ghost.png";
     private static final String KEY_IMAGE_PATH = "/key.png";
     private static final String TARGET_IMAGE_PATH = "/target.png";
