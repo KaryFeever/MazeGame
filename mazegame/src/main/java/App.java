@@ -3,144 +3,309 @@ import controller.MapParser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+
 import model.Game;
 import model.Map;
 import view.GameView;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-
-
 
 public class App extends Application {
 
-@Override
-public void start(Stage primaryStage) throws Exception {
-    // Process Maps from the file
-    MapParser mapParser = new MapParser();
-    mapParser.configureMaps();
+    private Stage stage;
+    private MapParser mapParser;
+    private Scene startScene;
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        this.stage = primaryStage;
 
-    // Create the start screen
-    Button startButton = new Button("Start");
-    startButton.setOnAction(event -> {
-        startGame(mapParser.getMap(0));
-    });
+        // Process Maps from the file
+        mapParser = new MapParser();
+        mapParser.configureMaps();
 
-    Button exitButton = new Button("Exit");
-        exitButton.setOnAction(event -> {
-            primaryStage.close();
+        // Create the start screen
+        Button startButton = new Button("New game");
+        startButton.setOnAction(event -> {
+            // startGame(mapParser.getMap(0));
+            // Create the playback screen
+            VBox startLayout = new VBox();
+            // Set alignment of startLayout to center
+            startLayout.setAlignment(Pos.CENTER);
+            startLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+            startLayout.setPrefSize(640, 480);
+            startLayout.setAlignment(Pos.CENTER);
+
+            // Create a ListView with sample map names
+            ListView<String> mapListView = new ListView<>();
+            mapListView.getItems().addAll("Map 1.txt", "Map 2.txt", "Map 3.txt",
+            "Map 4.txt", "Map 5.txt", "Map 6.txt","Map 7.txt", "Map 8.txt", "Map 9.txt");
+
+            // Create a ScrollPane and set the ListView as its content
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(mapListView);
+
+            // Set the height of the ScrollPane and ListView to show only a few items at a time
+            scrollPane.setPrefHeight(100);
+            mapListView.setPrefHeight(80);
+
+            // Add all sections to the main layout
+            startLayout.getChildren().addAll(scrollPane);
+
+            // Create buttons
+            Button saveButton = new Button("Play");
+            saveButton.setOnAction(event_save -> {
+                startGame(mapParser.getMap(0)); // Set the start screen layout as the scene
+            });
+
+            Button backButton = new Button("Back");
+            backButton.setOnAction(event_back -> {
+                stage.setScene(startScene); // Set the start screen layout as the scene
+            });
+
+            HBox buttonsBox = new HBox(saveButton, backButton);
+            buttonsBox.setSpacing(20);
+            buttonsBox.setAlignment(Pos.CENTER);
+
+            // Add buttons to the bottom of the layout
+            startLayout.getChildren().add(buttonsBox);
+            VBox.setMargin(buttonsBox, new Insets(20, 0, 0, 0));
+
+            // Create a Scene for the settings screen and set it on the stage
+            Scene settingsScene = new Scene(startLayout);
+            stage.setScene(settingsScene);
+
         });
+
+        Button settingsButton = new Button("Settings");
+            settingsButton.setOnAction(event -> {
+            // Create the settings screen
+            VBox settingsLayout = new VBox();
+            settingsLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+            settingsLayout.setPrefSize(640, 480);
+            settingsLayout.setAlignment(Pos.CENTER);
+
+            // Control set-up section
+            Label controlSetUpLabel = new Label("Control set-up");
+            ToggleGroup controlSetUpGroup = new ToggleGroup();
+            RadioButton mouseButton = new RadioButton("Mouse");
+            RadioButton keyboardButton = new RadioButton("Keyboard");
+            mouseButton.setToggleGroup(controlSetUpGroup);
+            keyboardButton.setToggleGroup(controlSetUpGroup);
+            mouseButton.setSelected(true); // Set default selection
+            keyboardButton.setSelected(false);
+            HBox controlSetUpBox = new HBox(mouseButton, keyboardButton);
+            controlSetUpBox.setSpacing(20);
+            controlSetUpBox.setAlignment(Pos.CENTER);
+            VBox controlSetUpVBox = new VBox(controlSetUpLabel, controlSetUpBox);
+            controlSetUpVBox.setSpacing(20);
+            controlSetUpVBox.setAlignment(Pos.CENTER);
+            controlSetUpVBox.setPadding(new Insets(0, 0, 30, 0));
+
+            // Gameplay mode section
+            Label gameplayModeLabel = new Label("Gameplay mode");
+            ToggleGroup gameplayModeGroup = new ToggleGroup();
+            RadioButton staticButton = new RadioButton("Static");
+            RadioButton dynamicButton = new RadioButton("Dynamic");
+            staticButton.setToggleGroup(gameplayModeGroup);
+            dynamicButton.setToggleGroup(gameplayModeGroup);
+            staticButton.setSelected(true); // Set default selection
+            dynamicButton.setSelected(false);
+            HBox gameplayModeBox = new HBox(staticButton, dynamicButton);
+            gameplayModeBox.setSpacing(20);
+            gameplayModeBox.setAlignment(Pos.CENTER);
+            VBox gameplayModeVBox = new VBox(gameplayModeLabel, gameplayModeBox);
+            gameplayModeVBox.setSpacing(20);
+            gameplayModeVBox.setAlignment(Pos.CENTER);
+            gameplayModeVBox.setPadding(new Insets(0, 0, 30, 0));
+
+            // Difficulty mode section
+            Label difficultyModeLabel = new Label("Difficulty mode");
+            ToggleGroup difficultyModeGroup = new ToggleGroup();
+            RadioButton easyButton = new RadioButton("Easy");
+            RadioButton mediumButton = new RadioButton("Medium");
+            RadioButton hardButton = new RadioButton("Hard");
+            RadioButton insaneButton = new RadioButton("Insane");
+            easyButton.setToggleGroup(difficultyModeGroup);
+            mediumButton.setToggleGroup(difficultyModeGroup);
+            hardButton.setToggleGroup(difficultyModeGroup);
+            insaneButton.setToggleGroup(difficultyModeGroup);
+            easyButton.setSelected(true); // Set default selection
+            mediumButton.setSelected(false);
+            hardButton.setSelected(false);
+            insaneButton.setSelected(false);
+            HBox difficultyModeBox = new HBox(easyButton, mediumButton, hardButton, insaneButton);
+            difficultyModeBox.setSpacing(20);
+            difficultyModeBox.setAlignment(Pos.CENTER);
+            VBox difficultyModeVBox = new VBox(difficultyModeLabel, difficultyModeBox);
+            difficultyModeVBox.setSpacing(20);
+            difficultyModeVBox.setAlignment(Pos.CENTER);
+            difficultyModeVBox.setPadding(new Insets(0, 0, 50, 0));
+
+            // Add all sections to the main layout
+            settingsLayout.getChildren().addAll(controlSetUpVBox, gameplayModeVBox, difficultyModeVBox);
+
+            // Create buttons
+            Button saveButton = new Button("Save");
+            saveButton.setOnAction(event_save -> {
+                stage.setScene(startScene); // Set the start screen layout as the scene
+            });
     
+            Button backButton = new Button("Back");
+            backButton.setOnAction(event_back -> {
+                stage.setScene(startScene); // Set the start screen layout as the scene
+            });
 
-    // StackPane startLayout = new StackPane(startButton, exitButton);
-    // Scene startScene = new Scene(startLayout, 640, 480);
-     // Create a VBox to hold the buttons
-     VBox vbox = new VBox();
-     vbox.getChildren().addAll(startButton, exitButton);
-     vbox.setSpacing(20); // Add spacing between buttons
- 
-     // Create a StackPane to hold the VBox and center it
-     StackPane startLayout = new StackPane(vbox);
-     startLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
-     startLayout.setPrefSize(640, 480);
+            HBox buttonsBox = new HBox(saveButton, backButton);
+            buttonsBox.setSpacing(20);
+            buttonsBox.setAlignment(Pos.CENTER);
 
-    // Show the start screen
-    primaryStage.setScene(new Scene(startLayout));
-    primaryStage.show();
-}
+            // Add buttons to the bottom of the layout
+            settingsLayout.getChildren().add(buttonsBox);
+            VBox.setMargin(buttonsBox, new Insets(20, 0, 0, 0));
 
-private void startGame(Map map) {
-    final int WIDTH = 640;
-    final int HEIGHT = 480;
+            // Create a Scene for the settings screen and set it on the stage
+            Scene settingsScene = new Scene(settingsLayout);
+            stage.setScene(settingsScene);
+        });
 
-    Game game = new Game(map);
-    GameController gameController = new GameController(game);
-    Canvas canvas = new Canvas(800, 800);
-    GameView gameView = new GameView(canvas, map, gameController);
-    gameView.draw();
-    map.printMap();
+        Button playbackButton = new Button("Playback");
+        playbackButton.setOnAction(event -> {
+            // Create the playback screen
+            VBox playbackLayout = new VBox();
+            // Set alignment of playbackLayout to center
+            playbackLayout.setAlignment(Pos.CENTER);
+            playbackLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+            playbackLayout.setPrefSize(640, 480);
+            playbackLayout.setAlignment(Pos.CENTER);
 
-    // set up the UI
-    BorderPane root = new BorderPane();
-    root.setCenter(canvas);
-    Scene scene = new Scene(root, WIDTH, HEIGHT);
+            // Create a ListView with sample map names
+            ListView<String> mapListView = new ListView<>();
+            mapListView.getItems().addAll("Map 1.txt", "Map 2.txt", "Map 3.txt",
+            "Map 4.txt", "Map 5.txt", "Map 6.txt","Map 7.txt", "Map 8.txt", "Map 9.txt");
 
-    scene.setOnKeyPressed(gameController::handleKeyPress);
+            // Create a ScrollPane and set the ListView as its content
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(mapListView);
 
-    gameView.updateGameView();
+            // Set the height of the ScrollPane and ListView to show only a few items at a time
+            scrollPane.setPrefHeight(100);
+            mapListView.setPrefHeight(80);
 
-    // display the UI
-    Stage stage = new Stage();
-    stage.setScene(scene);
-    stage.setTitle("GAME");
-    stage.show();
+            // Control Playback mode section
+            Label playbackModeLabel = new Label("Playback mode");
+            ToggleGroup playbackModeGroup = new ToggleGroup();
+            RadioButton stepbystepButton = new RadioButton("Step-by-step");
+            RadioButton fastButton = new RadioButton("Fast");
+            stepbystepButton.setToggleGroup(playbackModeGroup);
+            fastButton.setToggleGroup(playbackModeGroup);
+            stepbystepButton.setSelected(true); // Set default selection
+            fastButton.setSelected(false);
+            HBox playbackModeBox = new HBox(stepbystepButton, fastButton);
+            playbackModeBox.setSpacing(20);
+            playbackModeBox.setAlignment(Pos.CENTER);
+            VBox playbackModeVBox = new VBox(playbackModeLabel, playbackModeBox);
+            
+            playbackModeVBox.setSpacing(20);
+            playbackModeVBox.setAlignment(Pos.CENTER);
+            playbackModeVBox.setPadding(new Insets(0, 0, 30, 0));
+
+            // Add all sections to the main layout
+            playbackLayout.getChildren().addAll(scrollPane, playbackModeVBox);
+
+            // Create buttons
+            Button saveButton = new Button("Play");
+            saveButton.setOnAction(event_save -> {
+                stage.setScene(startScene); // Set the start screen layout as the scene
+            });
     
-    // // Define the dimensions of your canvas or screen
-    // int screenWidth = 800;
-    // int screenHeight = 800;
+            Button backButton = new Button("Back");
+            backButton.setOnAction(event_back -> {
+                stage.setScene(startScene); // Set the start screen layout as the scene
+            });
 
-    // // Create a two-dimensional array to represent your map
-    // int[][] mapData = {
-    //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //     {1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1},
-    //     {1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1},
-    //     {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-    //     {1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1},
-    //     {1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1},
-    //     {1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1},
-    //     {1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1},
-    //     {1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1},
-    //     {1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1},
-    //     {1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1},
-    //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    // };
+            HBox buttonsBox = new HBox(saveButton, backButton);
+            buttonsBox.setSpacing(20);
+            buttonsBox.setAlignment(Pos.CENTER);
 
-    // // Create a JavaFX Group to hold your sprites
-    // Group spriteGroup = new Group();
+            // Add buttons to the bottom of the layout
+            playbackLayout.getChildren().add(buttonsBox);
+            VBox.setMargin(buttonsBox, new Insets(20, 0, 0, 0));
 
-    // // Create a JavaFX Scene to display your sprites on
-    // Scene scene = new Scene(spriteGroup, screenWidth, screenHeight);
+            // Create a Scene for the settings screen and set it on the stage
+            Scene settingsScene = new Scene(playbackLayout);
+            stage.setScene(settingsScene);
+        });
 
-    // // Load your sprite images into JavaFX Image objects
-    // Image wallImage = new Image("/wall.png");
+        Button exitButton = new Button("Exit");
+        exitButton.setOnAction(event -> {
+            stage.close();
+        });
 
-    // // Define the dimensions of your sprites
-    // int spriteWidth = 64;
-    // int spriteHeight = 64;
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(startButton, settingsButton, playbackButton, exitButton);
+        vbox.setSpacing(20); // Add spacing between buttons
+        vbox.setAlignment(Pos.CENTER); // Center VBox
 
-    // // Iterate over the map data and place sprites on the canvas
-    // for (int i = 0; i < mapData.length; i++) {
-    //     for (int j = 0; j < mapData[i].length; j++) {
-    //         // Calculate the x and y coordinates for the sprite
-    //         int x = j * spriteWidth;
-    //         int y = i * spriteHeight;
+        // Add spacing between "Exit" and "Playback" buttons
+        VBox.setMargin(exitButton, new Insets(40, 0, 0, 0));
 
-    //         // Load the appropriate sprite image based on the map data
-    //         Image spriteImage = (mapData[i][j] == 1) ? wallImage : null;
+        // Create a StackPane to hold the VBox and center it
+        StackPane startLayout = new StackPane(vbox);
+        startLayout.setStyle("-fx-background-color: #FFFFFF;"); // Set background color
+        startLayout.setPrefSize(640, 480);
 
-    //         // Create a JavaFX ImageView object for the sprite and set its position and size
-    //         ImageView spriteView = new ImageView(spriteImage);
-    //         spriteView.setX(x);
-    //         spriteView.setY(y);
-    //         spriteView.setFitWidth(spriteWidth);
-    //         spriteView.setFitHeight(spriteHeight);
+        // Save the start screen layout as a scene
+        startScene = new Scene(startLayout);
 
-    //         // Add the sprite to the spriteGroup
-    //         spriteGroup.getChildren().add(spriteView);
-    //     }
-    // }
+        // Show the start screen
+        primaryStage.setScene(startScene);
+        primaryStage.show();
+    }
 
-    // // Display the scene on the screen
-    // Stage stage = new Stage();
-    // stage.setScene(scene);
-    // stage.show();
-}
+    private void startGame(Map map) {
+        final int WIDTH = 640;
+        final int HEIGHT = 480;
 
+        Game game = new Game(map);
+        GameController gameController = new GameController(game);
+        Canvas canvas = new Canvas(800, 800);
+        GameView gameView = new GameView(canvas, map, gameController);
+        gameView.draw();
+        map.printMap();
 
-public static void main(String[] args) {
-    launch(args);
-}
+        // set up the UI
+        BorderPane root = new BorderPane();
+        root.setCenter(canvas);
+        Scene scene = stage.getScene();
+        if (scene == null) {
+            scene = new Scene(root, WIDTH, HEIGHT);
+        } else {
+            scene.setRoot(root);
+        }
+
+        scene.setOnKeyPressed(gameController::handleKeyPress);
+
+        gameView.updateGameView();
+
+        // display the UI
+        stage.setScene(scene);
+        stage.setTitle("GAME");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
