@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import interfaces.Terrain;
@@ -20,6 +21,7 @@ public class MapParser {
     private int cols;
     private int rowIndex = 0;
     private Map map;
+    private String currentFileName;
     private ArrayList<Map> maps = new ArrayList<Map>();
     private File directory = new File("data/maps");
 
@@ -28,10 +30,14 @@ public class MapParser {
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
+                currentFileName = file.getName();
                 Map map = this.parseMap(file);
                 if(map != null) {
                     maps.add(map);
+                    map = null;
+                    rowIndex = 0;
                 }
+                
             }
         }
     }
@@ -48,7 +54,7 @@ public class MapParser {
             if (scanner.hasNextInt()) {
                 cols = scanner.nextInt();
                 scanner.close();
-                this.map = new Map(rows,cols);
+                this.map = new Map(rows,cols,currentFileName);
                 return true;
             }
             scanner.close();
@@ -134,6 +140,15 @@ public class MapParser {
 
     public Map getMap(int mapIndex) {
         return this.maps.get(mapIndex);
+    }
+
+    public List<String> getMapNames() {
+        List<String> mapNames = new ArrayList<>();
+        for(Map map : maps) {
+            mapNames.add(map.getName());
+        }
+
+        return mapNames;
     }
     
 }

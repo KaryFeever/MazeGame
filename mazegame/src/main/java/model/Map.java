@@ -10,13 +10,15 @@ import model.terrain.Field;
 import model.terrain.Wall;
 
 public class Map {
+    private String name;
     private int rows;
     private int cols;
     private Terrain[][] mapField;
 
-    public Map(int rows, int cols) {
+    public Map(int rows, int cols, String name) {
         this.rows = rows+2;
         this.cols = cols+2;
+        this.name = name;
         mapField = new Terrain[this.rows][this.cols];
         for(int row = 0; row < this.rows; row++) {
             mapField[row][0] = new Wall();
@@ -82,6 +84,11 @@ public class Map {
             mapString += "\n";
         }
         return mapString;
+    }
+
+
+    public String getName() {
+        return name;
     }
 
     
