@@ -4,17 +4,23 @@ import interfaces.GameObject.Directions;
 import javafx.scene.input.KeyEvent;
 import model.Game;
 import model.game_object.Ghost;
+import model.logs.Log;
 
 public class GameController {
     private Game game;
-    private GameLogs gameLogs;
+    private Log log;
     private int invulnerabilityCounter = 5;
     private boolean flag = true;
 
-    public GameController(Game game, GameLogs gameLogs) {
+    public GameController(Game game) {
         this.game = game;
-        this.gameLogs = gameLogs;
-        this.gameLogs.createLog(game.getMap().printMap());
+        String ghostsDirections = "GHOSTS DIRECTIONS\n";
+        for(Ghost ghost : game.getGhosts()) {
+            ghostsDirections += ghost.getDirection() + " ";
+        }
+        ghostsDirections += "\n";
+        this.log = new Log(game.getMap().printMap(), ghostsDirections);
+
     }
 
     public void handleKeyPress(KeyEvent event) {
@@ -40,7 +46,7 @@ public class GameController {
     public void updateGameState() {
         for(Ghost ghost : game.getGhosts()) {
             if(ghost.move(null)) {
-                gameLogs.getLog().addStep(game.getPacMan(), game.getGhosts());
+                log.addStep(game.getPacMan(), game.getGhosts());
             }
             checkIntersection();
         }
@@ -57,7 +63,7 @@ public class GameController {
                 if(game.getPacMan().getLives() <= 0) {
                     System.out.println("GAME OVER");
                     if(flag) {
-                        gameLogs.saveLog();
+                        log.saveLog();
                         flag = false;
                     }
                     
@@ -78,7 +84,7 @@ public class GameController {
             if(game.getPacMan().isKeyFlag()) {
                 System.out.println("WIN");
                 if(flag) {
-                    gameLogs.saveLog();
+                    log.saveLog();
                     flag = false;
                 }
             }

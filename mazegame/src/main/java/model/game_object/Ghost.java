@@ -88,5 +88,13 @@ public class Ghost implements GameObject {
     public int getCol() {
         return col;
     }
+
+    public Directions getDirection() {
+        return this.direction;
+    }
+
+    public void setDirection(Directions direction) {
+        this.direction = direction;
+    }
     
 }

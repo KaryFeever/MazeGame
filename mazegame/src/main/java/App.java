@@ -1,5 +1,5 @@
 import controller.GameController;
-import controller.GameLogs;
+import controller.LogParser;
 import controller.MapParser;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -22,6 +22,9 @@ public class App extends Application {
 
 @Override
 public void start(Stage primaryStage) throws Exception {
+    LogParser logParser = new LogParser();
+    logParser.configureLogs();
+
     // Process Maps from the file
     MapParser mapParser = new MapParser();
     mapParser.configureMaps();
@@ -61,8 +64,7 @@ private void startGame(Map map) {
     final int HEIGHT = 960;
 
     Game game = new Game(map);
-    GameLogs gameLogs = new GameLogs();
-    GameController gameController = new GameController(game, gameLogs);
+    GameController gameController = new GameController(game);
     Canvas GameCanvas = new Canvas(800, 800);
     Canvas HUDCanvas = new Canvas(800, 64);
     
@@ -85,6 +87,10 @@ private void startGame(Map map) {
     stage.setTitle("GAME");
     stage.show();
     
+}
+
+private void StartReplay() {
+
 }
 
 

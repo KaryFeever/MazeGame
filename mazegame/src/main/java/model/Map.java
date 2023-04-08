@@ -60,7 +60,7 @@ public class Map {
             for(int col = 1; col < cols - 1; col++) {
                 if(mapField[row][col].getClass() == Wall.class) {
                     // System.out.print("#");
-                    mapString += "#";
+                    mapString += "X";
                 } else if (mapField[row][col].getClass() == Field.class) {
                         if (mapField[row][col].getObject().isEmpty()) {
                             mapString += ".";

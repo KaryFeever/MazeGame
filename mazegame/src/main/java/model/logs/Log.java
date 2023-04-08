@@ -13,17 +13,17 @@ import model.game_object.PacMan;
 
 public class Log {
     private String logID;
+    private String path = "data/logs";
     private List<String> steps = new ArrayList<>();
     private String mapString;
     private String ghostsDirections;
     
     private int stepCounter = 0;
 
-    public Log(String mapString) {
+    public Log(String mapString, String ghostsDirections) {
         this.logID = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + ".log";
         this.mapString = mapString;
-
-
+        this.ghostsDirections = ghostsDirections;
     }
 
     public void  addStep(PacMan pacMan, List<Ghost> ghosts) {
@@ -39,12 +39,13 @@ public class Log {
     }
 
 
-    public void saveLog(String path) {
+    public void saveLog() {
         try {
             File file = new File(path + "/" + logID);
             FileWriter writer = new FileWriter(file);
             
-            writer.write("MAP\n" + mapString);
+            writer.write(mapString);
+            writer.write(ghostsDirections);
 
             for(String step : steps) {
                 writer.write(step);

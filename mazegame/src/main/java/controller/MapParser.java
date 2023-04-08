@@ -64,9 +64,11 @@ public class MapParser {
      * @return
      */
     private boolean parseFieldLine(String line) {
+        
         if(line.length() != cols) {
             return false;
         }
+        
         Scanner scanner = new Scanner(line);
         for(int col = 0; col < cols; col++) {
             Terrain newTerrain = null;
@@ -126,6 +128,7 @@ public class MapParser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        
         return map;
     }
 
