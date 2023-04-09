@@ -1,6 +1,7 @@
 import controller.GameController;
 import controller.LogParser;
 import controller.MapParser;
+import controller.ReplayController;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +20,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import model.Game;
 import model.Map;
+import model.Replay;
 import view.GameView;
+import view.ReplayView;
 
 public class App extends Application {
 
@@ -27,6 +30,7 @@ public class App extends Application {
     private MapParser mapParser;
     private Scene startScene;
     private int mapIndex = 0;
+    private int replayIndex = 0;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -94,7 +98,7 @@ public class App extends Application {
             // Create a Scene for the settings screen and set it on the stage
             Scene settingsScene = new Scene(startLayout);
             stage.setScene(settingsScene);
-            
+
             // Get the selected item from the ListView
             mapListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 System.out.println("Selected item: " + newValue);
@@ -209,8 +213,9 @@ public class App extends Application {
 
             // Create a ListView with sample map names
             ListView<String> mapListView = new ListView<>();
-            mapListView.getItems().addAll("Map 1.txt", "Map 2.txt", "Map 3.txt",
-            "Map 4.txt", "Map 5.txt", "Map 6.txt","Map 7.txt", "Map 8.txt", "Map 9.txt");
+            mapListView.getItems().addAll(logParser.getReplayNames());
+
+            mapListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
             // Create a ScrollPane and set the ListView as its content
             ScrollPane scrollPane = new ScrollPane();
@@ -245,7 +250,7 @@ public class App extends Application {
             Button saveButton = new Button("Play");
             saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
             saveButton.setOnAction(event_save -> {
-                stage.setScene(startScene); // Set the start screen layout as the scene
+                StartReplay(logParser.getReplays().get(replayIndex));
             });
     
             Button backButton = new Button("Back");
@@ -265,6 +270,11 @@ public class App extends Application {
             // Create a Scene for the settings screen and set it on the stage
             Scene settingsScene = new Scene(playbackLayout);
             stage.setScene(settingsScene);
+
+            // Get the selected item from the ListView
+            mapListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                this.replayIndex = logParser.getReplayNames().indexOf(newValue);
+            });
         });
 
         Button exitButton = new Button("Exit");
@@ -325,7 +335,40 @@ private void startGame(Map map) {
     
 }
 
-private void StartReplay() {
+private void StartReplay(Replay replay) {
+    final int WIDTH = 1024;
+    final int HEIGHT = 960;
+    ReplayController replayController = new ReplayController(replay);
+    Canvas GameCanvas = new Canvas(800, 800);
+    Canvas HUDCanvas = new Canvas(800, 64);
+
+    ReplayView replayView = new ReplayView(GameCanvas, HUDCanvas, replayController);
+    replayView.draw();
+
+    Button next = new Button("Next");
+    Button previous = new Button("Previous");
+    next.setOnAction(event -> {
+        replayController.next();
+        replayView.draw();
+    });
+    previous.setOnAction(event -> {
+        replayController.previous();
+        replayView.draw();
+    });
+
+    HBox hbox = new HBox(previous, next);
+
+    VBox vbox = new VBox(HUDCanvas, GameCanvas, hbox);
+
+    StackPane root = new StackPane(vbox);
+    root.setAlignment(Pos.CENTER);
+    Scene scene = new Scene(root, 800, 864);
+
+     // display the UI
+     Stage stage = new Stage();
+     stage.setScene(scene);
+     stage.setTitle("REPLAY");
+     stage.show();
 
 }
 

@@ -41,7 +41,7 @@ public class LogParser {
             int index = fileContent.indexOf("GHOSTS DIRECTIONS\n");
             String ghostDirections = fileContent.substring(index + "GHOSTS DIRECTIONS\n".length()).split("\n")[0];
             parseGhostDirections(game, ghostDirections);
-            currentReplay = new Replay(file.getAbsolutePath(), game);
+            currentReplay = new Replay(file.getName(), game);
             parseSteps(Arrays.copyOfRange(fileContent.substring(index + "GHOSTS DIRECTIONS\n".length()).split("\n"), 1, fileContent.substring(index + "GHOSTS DIRECTIONS\n".length()).split("\n").length));
 
             scanner.close();
@@ -82,10 +82,11 @@ public class LogParser {
             if(string.compareTo("STEP" + stepCounter) == 0) {
                 if(stepCounter != 0) {
                     currentReplay.addStep(pacmanDir, ghostsDirections);
-                    pacmanDir.clear();
-                    ghostsDirections.clear();
+                    pacmanDir = new ArrayList<>();
+                    ghostsDirections = new ArrayList<>();
                 }
                 stepCounter++;
+                
             } else if(string.contains("pacman")) {
                 pacmanDir.add(Integer.parseInt(string.split(":")[1].trim().split(" ")[0]));
                 pacmanDir.add(Integer.parseInt(string.split(":")[1].trim().split(" ")[1]));
@@ -95,8 +96,21 @@ public class LogParser {
                 ghostDir.add(Integer.parseInt(string.split(":")[1].trim().split(" ")[1]));
                 ghostsDirections.add(ghostDir);
             }
+            
         }
     }
     
+    public List<Replay> getReplays() {
+        return this.replays;
+    }
+
+    public List<String> getReplayNames() {
+        List<String> replayNames = new ArrayList<>();
+        for(Replay replay : replays) {
+            replayNames.add(replay.getName());
+        }
+
+        return replayNames;
+    }
 
 }

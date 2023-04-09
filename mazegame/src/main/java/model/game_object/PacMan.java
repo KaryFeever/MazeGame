@@ -69,6 +69,15 @@ public class PacMan implements GameObject {
         return false;
     }
 
+
+    public boolean move(int row, int col) {
+        map.getMapField(this.row, this.col).removeObject(this);
+        this.row = row;
+        this.col = col;
+        map.getMapField(this.row, this.col ).putObject(this);
+        return true;
+    }
+
     @Override
     public int getRow() {
         return row;

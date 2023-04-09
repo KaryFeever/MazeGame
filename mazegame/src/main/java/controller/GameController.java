@@ -41,6 +41,7 @@ public class GameController {
                 break;
 
         }
+        log.addStep(game.getPacMan(), game.getGhosts());
     }
 
     public void updateGameState() {
