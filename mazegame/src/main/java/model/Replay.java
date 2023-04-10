@@ -57,4 +57,16 @@ public class Replay {
         return this.name;
     }
 
+    public int getIndex() {
+        return this.stepIndex;
+    }
+
+    public void setIndex(int index) {
+        this.stepIndex = index;
+    }
+
+    public List<Map<String, Object>> getSteps() {
+        return this.steps;
+    }
+
 }

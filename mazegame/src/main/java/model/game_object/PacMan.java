@@ -104,5 +104,9 @@ public class PacMan implements GameObject {
         return this.lives;
     }
 
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
     
 }

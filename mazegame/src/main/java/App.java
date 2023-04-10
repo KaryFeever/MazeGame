@@ -3,6 +3,8 @@ import controller.LogParser;
 import controller.MapParser;
 import controller.ReplayController;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -31,6 +33,12 @@ public class App extends Application {
     private Scene startScene;
     private int mapIndex = 0;
     private int replayIndex = 0;
+    private int pacManLives = 3;
+    private int ghostsSpeed = 1;
+    private boolean easy = true;
+    private boolean medium = false;
+    private boolean hard = false;
+    private boolean insane = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -101,7 +109,6 @@ public class App extends Application {
 
             // Get the selected item from the ListView
             mapListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                System.out.println("Selected item: " + newValue);
                 this.mapIndex = mapParser.getMapNames().indexOf(newValue);
             });
 
@@ -160,10 +167,10 @@ public class App extends Application {
             mediumButton.setToggleGroup(difficultyModeGroup);
             hardButton.setToggleGroup(difficultyModeGroup);
             insaneButton.setToggleGroup(difficultyModeGroup);
-            easyButton.setSelected(true); // Set default selection
-            mediumButton.setSelected(false);
-            hardButton.setSelected(false);
-            insaneButton.setSelected(false);
+            easyButton.setSelected(easy); // Set default selection
+            mediumButton.setSelected(medium);
+            hardButton.setSelected(hard);
+            insaneButton.setSelected(insane);
             HBox difficultyModeBox = new HBox(easyButton, mediumButton, hardButton, insaneButton);
             difficultyModeBox.setSpacing(20);
             difficultyModeBox.setAlignment(Pos.CENTER);
@@ -180,6 +187,29 @@ public class App extends Application {
             saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
             saveButton.setOnAction(event_save -> {
                 stage.setScene(startScene); // Set the start screen layout as the scene
+                easy = false;
+                medium = false;
+                hard = false;
+                insane = false;
+                switch(((RadioButton)difficultyModeGroup.getSelectedToggle()).getText()) {
+                    case "Easy":
+                        pacManLives = 3;
+                        easy = true;
+                        break;
+                    case "Medium":
+                        pacManLives = 2;
+                        medium = true;
+                        break;
+                    case "Hard":
+                        pacManLives = 1;
+                        hard = true;
+                        break;
+                    case "Insane":
+                        pacManLives = 1;
+                        ghostsSpeed = 2;
+                        insane = true;
+                        break;
+                }
             });
     
             Button backButton = new Button("Back");
@@ -228,15 +258,27 @@ public class App extends Application {
             // Control Playback mode section
             Label playbackModeLabel = new Label("Playback mode");
             ToggleGroup playbackModeGroup = new ToggleGroup();
+            ToggleGroup playbackModeGroup2 = new ToggleGroup();
             RadioButton stepbystepButton = new RadioButton("Step-by-step");
             RadioButton fastButton = new RadioButton("Fast");
+            RadioButton start = new RadioButton("From the start");
+            RadioButton end = new RadioButton("From the end");
             stepbystepButton.setToggleGroup(playbackModeGroup);
             fastButton.setToggleGroup(playbackModeGroup);
+            start.setToggleGroup(playbackModeGroup2);
+            end.setToggleGroup(playbackModeGroup2);
             stepbystepButton.setSelected(true); // Set default selection
             fastButton.setSelected(false);
-            HBox playbackModeBox = new HBox(stepbystepButton, fastButton);
+            start.setSelected(true);
+            end.setSelected(false);
+            HBox playbackModeBox1 = new HBox(stepbystepButton, fastButton);
+            HBox playbackModeBox2 = new HBox(start, end);
+            VBox playbackModeBox = new VBox(playbackModeBox1, playbackModeBox2);
+            playbackModeBox1.setSpacing(20);
+            playbackModeBox1.setAlignment(Pos.CENTER);
+            playbackModeBox2.setSpacing(20);
+            playbackModeBox2.setAlignment(Pos.CENTER);
             playbackModeBox.setSpacing(20);
-            playbackModeBox.setAlignment(Pos.CENTER);
             VBox playbackModeVBox = new VBox(playbackModeLabel, playbackModeBox);
             
             playbackModeVBox.setSpacing(20);
@@ -250,7 +292,15 @@ public class App extends Application {
             Button saveButton = new Button("Play");
             saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
             saveButton.setOnAction(event_save -> {
-                StartReplay(logParser.getReplays().get(replayIndex));
+                int mode = 0;
+                int from = 0;
+                if( ((RadioButton)playbackModeGroup.getSelectedToggle()).getText().compareTo("Step-by-step") != 0) {
+                    mode = 1;
+                }
+                if(((RadioButton)playbackModeGroup2.getSelectedToggle()).getText().compareTo("From the start") != 0) {
+                    from = 1;
+                }
+                StartReplay(logParser.getReplays().get(replayIndex), mode, from);
             });
     
             Button backButton = new Button("Back");
@@ -310,11 +360,13 @@ private void startGame(Map map) {
     final int HEIGHT = 960;
 
     Game game = new Game(map);
+    game.getPacMan().setLives(pacManLives);
     GameController gameController = new GameController(game);
     Canvas GameCanvas = new Canvas(800, 800);
     Canvas HUDCanvas = new Canvas(800, 64);
     
     GameView gameView = new GameView(GameCanvas, HUDCanvas, map, gameController);
+    gameView.setGhostsSpeed(ghostsSpeed);
     gameView.draw();
 
     VBox vbox = new VBox(HUDCanvas, GameCanvas);
@@ -335,7 +387,9 @@ private void startGame(Map map) {
     
 }
 
-private void StartReplay(Replay replay) {
+private void StartReplay(Replay replay, int mode, int from) {
+    System.out.println(mode);
+    System.out.println(from);
     final int WIDTH = 1024;
     final int HEIGHT = 960;
     ReplayController replayController = new ReplayController(replay);
@@ -343,32 +397,66 @@ private void StartReplay(Replay replay) {
     Canvas HUDCanvas = new Canvas(800, 64);
 
     ReplayView replayView = new ReplayView(GameCanvas, HUDCanvas, replayController);
+    
+    VBox vbox = new VBox(HUDCanvas, GameCanvas);
+
+    if(mode == 0) {
+        Button next = new Button("Next");
+        Button previous = new Button("Previous");
+        next.setOnAction(event -> {
+            replayController.next();
+            replayView.draw();
+        });
+        previous.setOnAction(event -> {
+            replayController.previous();
+            replayView.draw();
+        });
+
+        HBox hbox = new HBox(previous, next);
+        vbox.getChildren().add(hbox);
+    }
+    if(from == 0) {
+
+        replay.setIndex(-1);
+    } else {
+        replayController.findKeyStep();
+        replayController.getReplay().setIndex(replayController.getReplay().getSteps().size() - 1);
+        replayController.updateState();
+        replay.getGame().getMap().getMapField(replay.getGame().getKey().getRow(), replay.getGame().getKey().getCol()).removeObject(replay.getGame().getKey());
+        replay.getGame().getPacMan().setKeyFlag(true);
+    }
     replayView.draw();
-
-    Button next = new Button("Next");
-    Button previous = new Button("Previous");
-    next.setOnAction(event -> {
-        replayController.next();
-        replayView.draw();
-    });
-    previous.setOnAction(event -> {
-        replayController.previous();
-        replayView.draw();
-    });
-
-    HBox hbox = new HBox(previous, next);
-
-    VBox vbox = new VBox(HUDCanvas, GameCanvas, hbox);
-
     StackPane root = new StackPane(vbox);
     root.setAlignment(Pos.CENTER);
     Scene scene = new Scene(root, 800, 864);
 
-     // display the UI
-     Stage stage = new Stage();
-     stage.setScene(scene);
-     stage.setTitle("REPLAY");
-     stage.show();
+    // display the UI
+    Stage stage = new Stage();
+    stage.setScene(scene);
+    stage.setTitle("REPLAY");
+    stage.show();
+    if(mode == 1) {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                for(int i = 0; i < replayController.getReplay().getSteps().size(); i++) {
+                    if(from == 0) {
+                        replayController.next();
+                    } else {
+                        replayController.previous();
+                    }
+                    Platform.runLater(() -> replayView.draw());
+                    Thread.sleep(200); // sleep for 1 second after each iteration
+                } 
+                return null;
+            }
+        };
+
+        new Thread(task).start();
+        
+    }
+    
+     
 
 }
 

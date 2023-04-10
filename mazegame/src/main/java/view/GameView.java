@@ -24,6 +24,7 @@ public class GameView {
     private static final String PACMAN_IMAGE_PATH = "/pacman.png";
     private static final String LIVES_IMAGE_PATH = "/heart.png";
     private static final int SPRITE_SIZE = 64;
+    private int ghostsSpeed = 1;
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private GraphicsContext hudGraphicsContext;
@@ -86,7 +87,7 @@ public class GameView {
 
     public void updateGameView() {
         final long[] startTime = { System.nanoTime() };
-        long INTERVAL = 200000000; // 50 milliseconds
+        long INTERVAL = 200000000 / ghostsSpeed; // 50 milliseconds
 
 
         new AnimationTimer() {
@@ -104,5 +105,9 @@ public class GameView {
                 // controller.updateGameState();
             }
         }.start();;
+    }
+
+    public void setGhostsSpeed(int ghostsSpeed) {
+        this.ghostsSpeed = ghostsSpeed;
     }
 }
