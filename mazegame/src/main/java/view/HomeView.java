@@ -1,22 +1,31 @@
 package view;
 
+import controller.AppController;
+import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+
 public class HomeView  extends Scene{
-    public HomeView() {
+    public HomeView(AppController appController) {
         super(new VBox(), 1024, 720); // create a new VBox with a width of 400 and height of 300
 
         // create the four buttons
         Button startButton = new Button("New game");
         startButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
-
+        startButton.setOnAction(event -> {
+            appController.setScene(1);
+        });
         Button settingsButton = new Button("Settings");
+        settingsButton.setOnAction(event -> {
+            appController.setScene(2);
+        });
         // add SetOnAction()
             // Call setScene(settingsMarker) from App.java
-            
+            // Scene settingsMarker = new Scene(new VBox(), 1024, 720);
+            // app.setScene(settingsMarker);
 
         Button playbackButton = new Button("Playback");
 

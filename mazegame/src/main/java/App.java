@@ -1,3 +1,4 @@
+import controller.AppController;
 import controller.GameController;
 import controller.LogParser;
 import controller.MapParser;
@@ -47,26 +48,12 @@ public class App extends Application {
         this.pacManLives = pacmanLives;
         this.ghostsSpeed = ghostsSpeed;
     }
-
-    // public void setScene(param) {
-        // stage.setScene(param)
-    //}
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-        this.stage = primaryStage;
-
-        LogParser logParser = new LogParser();
-        logParser.configureLogs();
-
-
-        mapParser = new MapParser();
-        mapParser.configureMaps();
-
-        Scene startScene = new HomeView();
-
-        primaryStage.setScene(startScene);
+        AppController appController = new AppController(primaryStage);
+        primaryStage.setScene(appController.getScene());
         primaryStage.show();
 
         // // Create the start screen

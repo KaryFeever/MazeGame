@@ -1,5 +1,6 @@
 package view;
 
+import controller.AppController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SettingsView extends Scene {
-    public SettingsView(int difficultyLevel) {
+    public SettingsView(int difficultyLevel, AppController appController) {
         super(new VBox(), 1024, 720); // create a new VBox with a width of 400 and height of 300
         
         // Difficulty mode section
@@ -85,7 +86,7 @@ public class SettingsView extends Scene {
         Button backButton = new Button("Back");
         backButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
         backButton.setOnAction(event_back -> {
-            // stage.setScene(startScene); // Set the start screen layout as the scene
+            appController.setScene(0);
         });
 
         HBox buttonsBox = new HBox(saveButton, backButton);

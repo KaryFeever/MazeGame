@@ -1,0 +1,83 @@
+package controller;
+
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import view.HomeView;
+import view.NewGameView;
+import view.SettingsView;
+
+public class AppController {
+    private Stage stage;
+    private MapParser mapParser;
+    private int mapIndex = 0;
+    private int replayIndex = 0;
+    private int pacManLives = 3;
+    private int ghostsSpeed = 1;
+    private int difficultyLevel = 0;
+    private LogParser logParser;
+    private Scene activeScene;
+    private Scene homeView;
+    private Scene settingsView;
+    private Scene newGameView;
+
+    public void setDifficultyConfiguration(int pacmanLives, int ghostsSpeed) {
+        this.pacManLives = pacmanLives;
+        this.ghostsSpeed = ghostsSpeed;
+    }
+    
+    // scene new game, settings atd
+    public AppController (Stage stage) {
+        this.stage = stage;
+        logParser = new LogParser();
+        logParser.configureLogs();
+
+        mapParser = new MapParser();
+        mapParser.configureMaps();
+
+        homeView = new HomeView(this);
+        settingsView = new SettingsView(1, this);
+        newGameView = new NewGameView(this);
+
+        activeScene = homeView;
+        
+    } 
+
+    public Scene getScene() {
+        return activeScene;
+    }
+
+    public void setScene(int scene) {
+        switch (scene) {
+            case 0:
+                activeScene = homeView;
+                break;
+            case 1:
+                activeScene = newGameView;
+                break;
+            case 2:
+                activeScene = settingsView;
+                break;
+            default:
+                break;
+        }
+        stage.setScene(activeScene);
+        stage.show();
+    }
+
+    public MapParser getMapParser () {
+       return mapParser; 
+    }
+
+    public int getPacManLives() {
+        return pacManLives;
+    }
+
+    public int getGhostsSpeed() {
+        return ghostsSpeed;
+    }
+
+    public void setScene(Scene scene) {
+        stage.setScene(scene);
+        stage.show();
+    }
+}
