@@ -19,6 +19,7 @@ public class LogParser {
     private List<Replay> replays = new ArrayList<>();
 
     public void configureLogs() {
+        replays.clear();
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -41,8 +42,11 @@ public class LogParser {
             int index = fileContent.indexOf("GHOSTS DIRECTIONS\n");
             String ghostDirections = fileContent.substring(index + "GHOSTS DIRECTIONS\n".length()).split("\n")[0];
             parseGhostDirections(game, ghostDirections);
+            index = fileContent.indexOf("PACMANLIVES\n");
+            String pacManLives = fileContent.substring(index + "PACMANLIVES\n".length()).split("\n")[0];
+            parsePacManLives(game, pacManLives);
             currentReplay = new Replay(file.getName(), game);
-            parseSteps(Arrays.copyOfRange(fileContent.substring(index + "GHOSTS DIRECTIONS\n".length()).split("\n"), 1, fileContent.substring(index + "GHOSTS DIRECTIONS\n".length()).split("\n").length));
+            parseSteps(Arrays.copyOfRange(fileContent.substring(index + "PACMANLIVES\n".length()).split("\n"), 1, fileContent.substring(index + "PACMANLIVES\n".length()).split("\n").length));
 
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -72,6 +76,10 @@ public class LogParser {
                     break;
             }
         }
+    }
+
+    private void parsePacManLives(Game game, String pacManLives) {
+        game.getPacMan().setLives(Integer.parseInt(pacManLives));
     }
 
     private void parseSteps(String[] steps) {

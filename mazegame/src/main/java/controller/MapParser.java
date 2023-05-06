@@ -27,6 +27,7 @@ public class MapParser {
 
 
     public void configureMaps() {
+        maps.clear();
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {

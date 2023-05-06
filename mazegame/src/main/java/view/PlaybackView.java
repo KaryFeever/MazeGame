@@ -23,8 +23,11 @@ import model.Replay;
 
 public class PlaybackView extends Scene{
     private int replayIndex = 0;
+    ListView<String> mapListView = new ListView<>();
+    AppController appController;
     public PlaybackView(AppController appController) {
         super(new VBox(), 1024, 720);
+        this.appController = appController;
         VBox playbackLayout = (VBox) getRoot();
 
         // Set alignment of playbackLayout to center
@@ -34,7 +37,7 @@ public class PlaybackView extends Scene{
         playbackLayout.setAlignment(Pos.CENTER);
 
         // Create a ListView with sample map names
-        ListView<String> mapListView = new ListView<>();
+        
         mapListView.getItems().addAll(appController.getLogParser().getReplayNames());
         // mapListView.getItems().addAll(logParser.getReplayNames());
         mapListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -116,18 +119,19 @@ public class PlaybackView extends Scene{
     }
 
     private void StartReplay(Replay replay, int mode, int from, AppController appController) {
-        System.out.println(mode);
-        System.out.println(from);
         final int WIDTH = 1024;
         final int HEIGHT = 960;
-        ReplayController replayController = new ReplayController(replay);
+        ReplayController replayController = new ReplayController(replay, appController);
         Canvas GameCanvas = new Canvas(800, 800);
         Canvas HUDCanvas = new Canvas(800, 64);
     
         ReplayView replayView = new ReplayView(GameCanvas, HUDCanvas, replayController);
         
         VBox vbox = new VBox(HUDCanvas, GameCanvas);
-    
+        Button exit = new Button("Exit");
+        exit.setOnAction(event -> {
+            appController.setScene(3);
+        });
         if(mode == 0) {
             Button next = new Button("Next");
             Button previous = new Button("Previous");
@@ -140,9 +144,13 @@ public class PlaybackView extends Scene{
                 replayView.draw();
             });
     
-            HBox hbox = new HBox(previous, next);
+            HBox hbox = new HBox(previous, next, exit);
             vbox.getChildren().add(hbox);
         }
+        else {
+            vbox.getChildren().add(exit);
+        }
+        
         if(from == 0) {
     
             replay.setIndex(-1);
@@ -179,7 +187,13 @@ public class PlaybackView extends Scene{
     
             new Thread(task).start();
             
+            
         }
+    }
+
+    public void updateReplayViews() {
+        mapListView.getItems().clear();
+        mapListView.getItems().addAll(appController.getLogParser().getReplayNames());
     }
     
 }

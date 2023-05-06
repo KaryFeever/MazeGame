@@ -22,7 +22,7 @@ public class GameController {
             ghostsDirections += ghost.getDirection() + " ";
         }
         ghostsDirections += "\n";
-        this.log = new Log(game.getMap().printMap(), ghostsDirections);
+        this.log = new Log(game.getMap().printMap(), ghostsDirections, appController.getPacManLives());
 
     }
 
@@ -71,6 +71,8 @@ public class GameController {
                         log.saveLog();
                         flag = false;
                     }
+                    appController.setLabel("GAME OVER");
+                    appController.switchMode(true);
                     appController.setScene(4);
                 }
                 
@@ -87,11 +89,14 @@ public class GameController {
         // Check intersection between PacMan and Target
         if((game.getPacMan().getCol() == game.getTarget().getCol()) && (game.getPacMan().getRow() == game.getTarget().getRow())) {
             if(game.getPacMan().isKeyFlag()) {
-                System.out.println("WIN");
+                // System.out.println("WIN");
                 if(flag) {
                     log.saveLog();
                     flag = false;
                 }
+                appController.setLabel("WIN");
+                appController.switchMode(true);
+                appController.setScene(4);
             }
         }
         invulnerabilityCounter++;
@@ -103,6 +108,10 @@ public class GameController {
 
     public boolean getKeyFlag() {
         return game.getPacMan().isKeyFlag();
+    }
+
+    public boolean getGameOverFlag() {
+        return flag;
     }
     
 }

@@ -12,16 +12,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SettingsView extends Scene {
-    public SettingsView(int difficultyLevel, AppController appController) {
+    private AppController appController;
+    RadioButton easyButton;
+    RadioButton mediumButton;
+    RadioButton hardButton;
+    RadioButton insaneButton;
+    public SettingsView(AppController appController) {
         super(new VBox(), 1024, 720);
+        this.appController = appController;
         
         // Difficulty mode section
         Label difficultyModeLabel = new Label("Difficulty mode");
 
-        RadioButton easyButton = new RadioButton("Easy");
-        RadioButton mediumButton = new RadioButton("Medium");
-        RadioButton hardButton = new RadioButton("Hard");
-        RadioButton insaneButton = new RadioButton("Insane");
+        easyButton = new RadioButton("Easy");
+        mediumButton = new RadioButton("Medium");
+        hardButton = new RadioButton("Hard");
+        insaneButton = new RadioButton("Insane");
 
 
         ToggleGroup difficultyModeGroup = new ToggleGroup();
@@ -30,21 +36,7 @@ public class SettingsView extends Scene {
         hardButton.setToggleGroup(difficultyModeGroup);
         insaneButton.setToggleGroup(difficultyModeGroup);
 
-        switch(difficultyLevel) {
-            case 0:
-                easyButton.setSelected(true); 
-                break;
-            case 1:
-                mediumButton.setSelected(true);
-                break;
-            case 2:
-                hardButton.setSelected(true);
-                break;
-            case 3:
-                insaneButton.setSelected(true);
-                break;
-        }
-        
+        this.setSelected();
         
         HBox difficultyModeBox = new HBox(easyButton, mediumButton, hardButton, insaneButton);
         difficultyModeBox.setSpacing(20);
@@ -59,32 +51,27 @@ public class SettingsView extends Scene {
         Button saveButton = new Button("Save");
         saveButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
         saveButton.setOnAction(event_save -> {
-            // stage.setScene(startScene); // Set the start screen layout as the scene
-            // switch(((RadioButton)difficultyModeGroup.getSelectedToggle()).getText()) {
-            //     case "Easy":
-            //          TODO: call function setDifficultyConfiguration()
-            //         pacManLives = 3;
-            //         easy = 0;
-            //         break;
-            //     case "Medium":
-            //         pacManLives = 2;
-            //         medium = 1;
-            //         break;
-            //     case "Hard":
-            //         pacManLives = 1;
-            //         hard = true;
-            //         break;
-            //     case "Insane":
-            //         pacManLives = 1;
-            //         ghostsSpeed = 2;
-            //         insane = true;
-            //         break;
-            // }
+            switch(((RadioButton)difficultyModeGroup.getSelectedToggle()).getText()) {
+                case "Easy":
+                    appController.setDifficultyConfiguration(0, 3, 1);
+                    break;
+                case "Medium":
+                    appController.setDifficultyConfiguration(1, 2, 1);
+                    break;
+                case "Hard":
+                    appController.setDifficultyConfiguration(2, 1, 1);
+                    break;
+                case "Insane":
+                    appController.setDifficultyConfiguration(3, 1, 2);
+                    break;
+            }
+            appController.setScene(0);
         });
     
         Button backButton = new Button("Back");
         backButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
         backButton.setOnAction(event_back -> {
+            this.setSelected();
             appController.setScene(0);
         });
 
@@ -98,5 +85,22 @@ public class SettingsView extends Scene {
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);
 
+    }
+
+    private void setSelected() {
+        switch(appController.getDifficultyLevel()) {
+            case 0:
+                easyButton.setSelected(true); 
+                break;
+            case 1:
+                mediumButton.setSelected(true);
+                break;
+            case 2:
+                hardButton.setSelected(true);
+                break;
+            case 3:
+                insaneButton.setSelected(true);
+                break;
+        }
     }
 }

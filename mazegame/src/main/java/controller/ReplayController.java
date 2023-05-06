@@ -74,8 +74,7 @@ public class ReplayController {
                     invulnerabilityCounter = 0;
                 }
                 if(replay.getGame().getPacMan().getLives() <= 0) {
-                    System.out.println("replay.getGame() OVER");
-                    
+                    // game over
                 }
                 
             }
@@ -92,33 +91,7 @@ public class ReplayController {
         // Check intersection between PacMan and Target
         if((replay.getGame().getPacMan().getCol() == replay.getGame().getTarget().getCol()) && (replay.getGame().getPacMan().getRow() == replay.getGame().getTarget().getRow())) {
             if(replay.getGame().getPacMan().isKeyFlag()) {
-                System.out.println("WIN");
-                    // Stage primaryStage = (Stage) replay.getGame();
-                    // Stage dialogStage = new Stage();
-                    // dialogStage.initModality(Modality.APPLICATION_MODAL);
-                    // dialogStage.initOwner(primaryStage);
-        
-                    // VBox root = new VBox();
-                    // root.setSpacing(20);
-        
-                    // Label winLabel = new Label("WIN");
-                    // Button newGameButton = new Button("New Game");
-                    // Button exitButton = new Button("Exit");
-        
-                    // root.getChildren().addAll(winLabel, newGameButton, exitButton);
-        
-                    // newGameButton.setOnAction(event -> {
-                    //     dialogStage.close();
-                    // });
-        
-                    // exitButton.setOnAction(event -> {
-                    //     dialogStage.close();
-                    //     primaryStage.close();
-                    // });
-        
-                    // Scene winScene = new Scene(root, 300, 200);
-                    // dialogStage.setScene(winScene);
-                    // dialogStage.show();
+                // win
             }
         }
         invulnerabilityCounter++;

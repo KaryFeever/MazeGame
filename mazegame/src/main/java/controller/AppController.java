@@ -24,7 +24,8 @@ public class AppController {
     private Scene playbackView;
     private Scene theEndView;
 
-    public void setDifficultyConfiguration(int pacmanLives, int ghostsSpeed) {
+    public void setDifficultyConfiguration(int difficultyLevel, int pacmanLives, int ghostsSpeed) {
+        this.difficultyLevel = difficultyLevel;
         this.pacManLives = pacmanLives;
         this.ghostsSpeed = ghostsSpeed;
     }
@@ -39,7 +40,7 @@ public class AppController {
         mapParser.configureMaps();
 
         homeView = new HomeView(this);
-        settingsView = new SettingsView(1, this);
+        settingsView = new SettingsView(this);
         newGameView = new NewGameView(this);
         playbackView = new PlaybackView(this);
         theEndView = new TheEndView(this);
@@ -68,9 +69,12 @@ public class AppController {
                 break;
             //playback
             case 3:
+                logParser.configureLogs();
+                ((PlaybackView) playbackView).updateReplayViews();
                 activeScene = playbackView;
                 break;
             case 4:
+                mapParser.configureMaps();
                 activeScene = theEndView;
             default:
                 break;
@@ -102,5 +106,17 @@ public class AppController {
 
     public void closeScene() {
         stage.close();
+    }
+
+    public void setLabel(String string) {
+        ((TheEndView) theEndView).setLabel(string);
+    }
+
+    public void switchMode(boolean mode) {
+        ((TheEndView) theEndView).setMode(mode);
+    }
+
+    public int getDifficultyLevel() {
+        return difficultyLevel;
     }
 }

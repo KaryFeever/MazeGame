@@ -29,6 +29,9 @@ public class HomeView  extends Scene{
         });
 
         Button exitButton = new Button("Exit");
+        exitButton.setOnAction(event -> {
+            appController.closeScene();
+        });
         exitButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
 
         // add the buttons to the VBox

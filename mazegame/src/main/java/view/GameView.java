@@ -30,6 +30,7 @@ public class GameView {
     private GraphicsContext hudGraphicsContext;
     private Map map;
     private GameController controller;
+    private AnimationTimer animationTimer;
 
     public GameView(Canvas canvas, Canvas HUDCanvas, Map map, GameController controller) {
         this.canvas = canvas;
@@ -90,7 +91,7 @@ public class GameView {
         long INTERVAL = 200000000 / ghostsSpeed; // 50 milliseconds
 
 
-        new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 long elapsedTime = now - startTime[0];
@@ -101,10 +102,13 @@ public class GameView {
                 }
                 draw();
                 drawLives();
-                // draw();
-                // controller.updateGameState();
+                
+                if(!controller.getGameOverFlag()) {
+                    animationTimer.stop();
+                }
             }
-        }.start();;
+        };
+        animationTimer.start();
     }
 
     public void setGhostsSpeed(int ghostsSpeed) {

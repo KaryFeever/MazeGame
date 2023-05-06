@@ -17,13 +17,15 @@ public class Log {
     private List<String> steps = new ArrayList<>();
     private String mapString;
     private String ghostsDirections;
+    private String pacmanLives = "PACMANLIVES";
     
     private int stepCounter = 0;
 
-    public Log(String mapString, String ghostsDirections) {
+    public Log(String mapString, String ghostsDirections, int pacmanLives) {
         this.logID = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + ".log";
         this.mapString = mapString;
         this.ghostsDirections = ghostsDirections;
+        this.pacmanLives += "\n" + pacmanLives + "\n";
     }
 
     public void  addStep(PacMan pacMan, List<Ghost> ghosts) {
@@ -46,6 +48,7 @@ public class Log {
             
             writer.write(mapString);
             writer.write(ghostsDirections);
+            writer.write(pacmanLives);
 
             for(String step : steps) {
                 writer.write(step);

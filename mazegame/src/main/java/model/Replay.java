@@ -20,7 +20,6 @@ public class Replay {
 
     public void addStep(List<Integer> pacmanDir, List<List<Integer>> ghostsDirections) {
         Map<String, Object> step = new HashMap<String, Object>();
-        System.out.println(pacmanDir.get(0));
         step.put("PacMan", pacmanDir);
         step.put("Ghosts", ghostsDirections);
         steps.add(step);
