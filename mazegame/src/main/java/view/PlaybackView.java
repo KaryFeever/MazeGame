@@ -156,13 +156,10 @@ public class PlaybackView extends Scene{
         replayView.draw();
         StackPane root = new StackPane(vbox);
         root.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(root, 800, 864);
+        Scene scene = new Scene(root, 1024, 960);
     
         // display the UI
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("REPLAY");
-        stage.show();
+        appController.setScene(scene);
         if(mode == 1) {
             Task<Void> task = new Task<Void>() {
                 @Override

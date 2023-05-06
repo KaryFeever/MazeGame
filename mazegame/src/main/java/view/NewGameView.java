@@ -80,7 +80,7 @@ public class NewGameView extends Scene {
     
         Game game = new Game(map);
         game.getPacMan().setLives(appController.getPacManLives());
-        GameController gameController = new GameController(game);
+        GameController gameController = new GameController(game, appController);
         Canvas GameCanvas = new Canvas(800, 800);
         Canvas HUDCanvas = new Canvas(800, 64);
         

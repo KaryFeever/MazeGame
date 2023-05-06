@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import view.HomeView;
 import view.NewGameView;
 import view.SettingsView;
+import view.TheEndView;
 import view.PlaybackView;
 
 public class AppController {
@@ -21,6 +22,7 @@ public class AppController {
     private Scene settingsView;
     private Scene newGameView;
     private Scene playbackView;
+    private Scene theEndView;
 
     public void setDifficultyConfiguration(int pacmanLives, int ghostsSpeed) {
         this.pacManLives = pacmanLives;
@@ -40,6 +42,7 @@ public class AppController {
         settingsView = new SettingsView(1, this);
         newGameView = new NewGameView(this);
         playbackView = new PlaybackView(this);
+        theEndView = new TheEndView(this);
 
         activeScene = homeView;
         
@@ -67,6 +70,8 @@ public class AppController {
             case 3:
                 activeScene = playbackView;
                 break;
+            case 4:
+                activeScene = theEndView;
             default:
                 break;
         }
@@ -93,5 +98,9 @@ public class AppController {
 
     public LogParser getLogParser() {
         return logParser;
+    }
+
+    public void closeScene() {
+        stage.close();
     }
 }

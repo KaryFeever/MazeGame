@@ -3,6 +3,13 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.Replay;
 import model.game_object.Ghost;
 
@@ -10,9 +17,11 @@ public class ReplayController {
     private Replay replay;
     private int invulnerabilityCounter = 5;
     private int keyPickedUpStepIndex = -1;
+    private AppController appController;
 
-    public ReplayController(Replay replay) {
+    public ReplayController(Replay replay, AppController appController) {
         this.replay = replay;
+        this.appController = appController;
         // replay.printSteps();
     }
 
@@ -84,7 +93,32 @@ public class ReplayController {
         if((replay.getGame().getPacMan().getCol() == replay.getGame().getTarget().getCol()) && (replay.getGame().getPacMan().getRow() == replay.getGame().getTarget().getRow())) {
             if(replay.getGame().getPacMan().isKeyFlag()) {
                 System.out.println("WIN");
-               
+                    // Stage primaryStage = (Stage) replay.getGame();
+                    // Stage dialogStage = new Stage();
+                    // dialogStage.initModality(Modality.APPLICATION_MODAL);
+                    // dialogStage.initOwner(primaryStage);
+        
+                    // VBox root = new VBox();
+                    // root.setSpacing(20);
+        
+                    // Label winLabel = new Label("WIN");
+                    // Button newGameButton = new Button("New Game");
+                    // Button exitButton = new Button("Exit");
+        
+                    // root.getChildren().addAll(winLabel, newGameButton, exitButton);
+        
+                    // newGameButton.setOnAction(event -> {
+                    //     dialogStage.close();
+                    // });
+        
+                    // exitButton.setOnAction(event -> {
+                    //     dialogStage.close();
+                    //     primaryStage.close();
+                    // });
+        
+                    // Scene winScene = new Scene(root, 300, 200);
+                    // dialogStage.setScene(winScene);
+                    // dialogStage.show();
             }
         }
         invulnerabilityCounter++;

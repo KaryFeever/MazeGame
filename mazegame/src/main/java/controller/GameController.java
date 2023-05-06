@@ -11,9 +11,12 @@ public class GameController {
     private Log log;
     private int invulnerabilityCounter = 5;
     private boolean flag = true;
+    private AppController appController;
 
-    public GameController(Game game) {
+    public GameController(Game game, AppController appController) {
         this.game = game;
+        this.appController = appController;
+
         String ghostsDirections = "GHOSTS DIRECTIONS\n";
         for(Ghost ghost : game.getGhosts()) {
             ghostsDirections += ghost.getDirection() + " ";
@@ -62,12 +65,13 @@ public class GameController {
                     invulnerabilityCounter = 0;
                 }
                 if(game.getPacMan().getLives() <= 0) {
-                    System.out.println("GAME OVER");
+                    
+                    //System.out.println("GAME OVER");
                     if(flag) {
                         log.saveLog();
                         flag = false;
                     }
-                    
+                    appController.setScene(4);
                 }
                 
             }
