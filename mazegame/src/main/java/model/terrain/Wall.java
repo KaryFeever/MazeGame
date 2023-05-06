@@ -60,3 +60,4 @@ public class Wall implements Terrain {
     public boolean removeObject(GameObject object) {
         return false;
     }
+}
