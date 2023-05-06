@@ -12,7 +12,6 @@ import javafx.scene.text.FontWeight;
 
 public class TheEndView extends Scene{
     Label difficultyModeLabel = new Label();
-    int mode = 1;
     Button newGameButton;
     public TheEndView(AppController appController) {
         super(new VBox(), 1024, 720);
@@ -21,7 +20,7 @@ public class TheEndView extends Scene{
         newGameButton = new Button("New game");
         newGameButton.setStyle("-fx-background-color: #2dc39d; -fx-text-fill: #FFFFFF;");
         newGameButton.setOnAction(event -> {
-            appController.setScene(mode);
+            appController.setScene(1);
         });
 
         Button exitButton = new Button("Exit");
@@ -39,21 +38,14 @@ public class TheEndView extends Scene{
 
         // center the VBox in the scene
         vbox.setAlignment(Pos.CENTER);
-
         vbox.setSpacing(20);
     }
     
+    
+    /** 
+     * @param label
+     */
     public void setLabel(String label) {
         difficultyModeLabel.setText(label);
-    }
-
-    public void setMode(boolean mode) {
-        if(mode) {
-            this.mode = 1;
-            newGameButton.setText("New game");
-        } else {
-            this.mode = 3;
-            newGameButton.setText("Repeat");
-        }
     }
 }

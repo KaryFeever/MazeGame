@@ -74,6 +74,11 @@ public class NewGameView extends Scene {
         });
     }
 
+    
+    /** 
+     * @param map
+     * @param appController
+     */
     private void startGame(Map map, AppController appController) {
         final int WIDTH = 1024;
         final int HEIGHT = 960;

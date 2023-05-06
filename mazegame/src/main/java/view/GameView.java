@@ -111,6 +111,10 @@ public class GameView {
         animationTimer.start();
     }
 
+    
+    /** 
+     * @param ghostsSpeed
+     */
     public void setGhostsSpeed(int ghostsSpeed) {
         this.ghostsSpeed = ghostsSpeed;
     }

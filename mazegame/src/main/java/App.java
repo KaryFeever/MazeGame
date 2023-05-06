@@ -44,6 +44,11 @@ public class App extends Application {
 
     private int difficultyLevel = 0;
 
+    
+    /** 
+     * @param pacmanLives
+     * @param ghostsSpeed
+     */
     public void setDifficultyConfiguration(int pacmanLives, int ghostsSpeed) {
         this.pacManLives = pacmanLives;
         this.ghostsSpeed = ghostsSpeed;

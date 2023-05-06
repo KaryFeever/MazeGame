@@ -17,7 +17,10 @@ public class Replay {
         this.name = name;
         this.game = game;
     }
-
+    
+    /** 
+     * @param ghostsDirections
+     */
     public void addStep(List<Integer> pacmanDir, List<List<Integer>> ghostsDirections) {
         Map<String, Object> step = new HashMap<String, Object>();
         step.put("PacMan", pacmanDir);
@@ -67,5 +70,4 @@ public class Replay {
     public List<Map<String, Object>> getSteps() {
         return this.steps;
     }
-
 }

@@ -1,0 +1,527 @@
+10 10
+.........T
+XX...XX...
+X.........
+XXXXXXX...
+....XG....
+XX..XGX...
+....XXX...
+XX...XX.K.
+S.........
+XX...XX...
+GHOSTS DIRECTIONS
+RIGHT RIGHT 
+PACMANLIVES
+1
+STEP0
+pacman: 9 1
+ghost0: 5 7
+ghost1: 6 6
+STEP1
+pacman: 9 1
+ghost0: 5 8
+ghost1: 6 6
+STEP2
+pacman: 9 1
+ghost0: 5 9
+ghost1: 6 6
+STEP3
+pacman: 9 1
+ghost0: 5 10
+ghost1: 6 6
+STEP4
+pacman: 9 1
+ghost0: 4 10
+ghost1: 6 6
+STEP5
+pacman: 9 1
+ghost0: 3 10
+ghost1: 6 6
+STEP6
+pacman: 9 1
+ghost0: 2 10
+ghost1: 6 6
+STEP7
+pacman: 9 1
+ghost0: 1 10
+ghost1: 6 6
+STEP8
+pacman: 9 1
+ghost0: 1 9
+ghost1: 6 6
+STEP9
+pacman: 9 1
+ghost0: 1 8
+ghost1: 6 6
+STEP10
+pacman: 9 1
+ghost0: 1 7
+ghost1: 6 6
+STEP11
+pacman: 9 1
+ghost0: 1 6
+ghost1: 6 6
+STEP12
+pacman: 9 1
+ghost0: 1 6
+ghost1: 5 6
+STEP13
+pacman: 9 1
+ghost0: 1 7
+ghost1: 5 6
+STEP14
+pacman: 9 1
+ghost0: 1 7
+ghost1: 5 7
+STEP15
+pacman: 9 1
+ghost0: 1 8
+ghost1: 5 7
+STEP16
+pacman: 9 1
+ghost0: 1 8
+ghost1: 5 8
+STEP17
+pacman: 9 1
+ghost0: 1 9
+ghost1: 5 8
+STEP18
+pacman: 9 1
+ghost0: 1 9
+ghost1: 6 8
+STEP19
+pacman: 9 1
+ghost0: 1 10
+ghost1: 6 8
+STEP20
+pacman: 9 1
+ghost0: 1 10
+ghost1: 5 8
+STEP21
+pacman: 9 1
+ghost0: 1 10
+ghost1: 4 8
+STEP22
+pacman: 9 1
+ghost0: 1 10
+ghost1: 4 9
+STEP23
+pacman: 9 1
+ghost0: 1 10
+ghost1: 4 10
+STEP24
+pacman: 9 1
+ghost0: 1 10
+ghost1: 3 10
+STEP25
+pacman: 9 1
+ghost0: 1 9
+ghost1: 3 10
+STEP26
+pacman: 9 1
+ghost0: 1 8
+ghost1: 3 10
+STEP27
+pacman: 9 1
+ghost0: 1 8
+ghost1: 3 9
+STEP28
+pacman: 9 1
+ghost0: 1 7
+ghost1: 3 9
+STEP29
+pacman: 9 1
+ghost0: 1 7
+ghost1: 2 9
+STEP30
+pacman: 9 1
+ghost0: 1 6
+ghost1: 2 9
+STEP31
+pacman: 9 1
+ghost0: 1 6
+ghost1: 1 9
+STEP32
+pacman: 9 1
+ghost0: 1 5
+ghost1: 1 9
+STEP33
+pacman: 9 1
+ghost0: 1 5
+ghost1: 1 10
+STEP34
+pacman: 9 1
+ghost0: 1 4
+ghost1: 1 10
+STEP35
+pacman: 9 1
+ghost0: 1 4
+ghost1: 2 10
+STEP36
+pacman: 9 1
+ghost0: 1 3
+ghost1: 2 10
+STEP37
+pacman: 9 1
+ghost0: 1 3
+ghost1: 1 10
+STEP38
+pacman: 9 1
+ghost0: 1 2
+ghost1: 1 10
+STEP39
+pacman: 9 2
+ghost0: 1 2
+ghost1: 1 10
+STEP40
+pacman: 9 2
+ghost0: 1 2
+ghost1: 1 9
+STEP41
+pacman: 9 2
+ghost0: 1 2
+ghost1: 2 9
+STEP42
+pacman: 9 3
+ghost0: 1 2
+ghost1: 2 9
+STEP43
+pacman: 9 3
+ghost0: 1 2
+ghost1: 2 10
+STEP44
+pacman: 9 4
+ghost0: 1 2
+ghost1: 2 10
+STEP45
+pacman: 9 4
+ghost0: 1 2
+ghost1: 2 9
+STEP46
+pacman: 9 4
+ghost0: 1 3
+ghost1: 2 9
+STEP47
+pacman: 9 4
+ghost0: 1 3
+ghost1: 2 8
+STEP48
+pacman: 9 5
+ghost0: 1 3
+ghost1: 2 8
+STEP49
+pacman: 9 5
+ghost0: 1 4
+ghost1: 2 8
+STEP50
+pacman: 9 5
+ghost0: 1 4
+ghost1: 2 9
+STEP51
+pacman: 9 6
+ghost0: 1 4
+ghost1: 2 9
+STEP52
+pacman: 9 6
+ghost0: 1 5
+ghost1: 2 9
+STEP53
+pacman: 9 6
+ghost0: 1 5
+ghost1: 2 10
+STEP54
+pacman: 9 6
+ghost0: 1 6
+ghost1: 2 10
+STEP55
+pacman: 9 7
+ghost0: 1 6
+ghost1: 2 10
+STEP56
+pacman: 9 7
+ghost0: 1 6
+ghost1: 3 10
+STEP57
+pacman: 9 7
+ghost0: 1 5
+ghost1: 3 10
+STEP58
+pacman: 9 7
+ghost0: 1 5
+ghost1: 3 9
+STEP59
+pacman: 9 8
+ghost0: 1 5
+ghost1: 3 9
+STEP60
+pacman: 9 8
+ghost0: 1 4
+ghost1: 3 9
+STEP61
+pacman: 9 8
+ghost0: 1 4
+ghost1: 3 10
+STEP62
+pacman: 9 9
+ghost0: 1 4
+ghost1: 3 10
+STEP63
+pacman: 9 9
+ghost0: 1 3
+ghost1: 3 10
+STEP64
+pacman: 9 9
+ghost0: 1 3
+ghost1: 3 9
+STEP65
+pacman: 9 9
+ghost0: 1 2
+ghost1: 3 9
+STEP66
+pacman: 9 9
+ghost0: 1 2
+ghost1: 4 9
+STEP67
+pacman: 9 9
+ghost0: 1 1
+ghost1: 4 9
+STEP68
+pacman: 9 9
+ghost0: 1 1
+ghost1: 4 8
+STEP69
+pacman: 8 9
+ghost0: 1 1
+ghost1: 4 8
+STEP70
+pacman: 8 9
+ghost0: 1 1
+ghost1: 5 8
+STEP71
+pacman: 8 9
+ghost0: 1 1
+ghost1: 5 9
+STEP72
+pacman: 8 9
+ghost0: 1 1
+ghost1: 5 10
+STEP73
+pacman: 8 9
+ghost0: 1 1
+ghost1: 5 9
+STEP74
+pacman: 9 9
+ghost0: 1 1
+ghost1: 5 9
+STEP75
+pacman: 9 9
+ghost0: 1 1
+ghost1: 4 9
+STEP76
+pacman: 9 9
+ghost0: 1 1
+ghost1: 4 10
+STEP77
+pacman: 9 9
+ghost0: 1 2
+ghost1: 4 10
+STEP78
+pacman: 9 9
+ghost0: 1 2
+ghost1: 4 9
+STEP79
+pacman: 9 9
+ghost0: 1 3
+ghost1: 4 9
+STEP80
+pacman: 9 9
+ghost0: 1 3
+ghost1: 4 8
+STEP81
+pacman: 9 9
+ghost0: 1 4
+ghost1: 4 8
+STEP82
+pacman: 9 9
+ghost0: 1 4
+ghost1: 4 9
+STEP83
+pacman: 9 9
+ghost0: 2 4
+ghost1: 4 9
+STEP84
+pacman: 9 9
+ghost0: 2 4
+ghost1: 4 8
+STEP85
+pacman: 8 9
+ghost0: 2 4
+ghost1: 4 8
+STEP86
+pacman: 8 9
+ghost0: 3 4
+ghost1: 4 8
+STEP87
+pacman: 7 9
+ghost0: 3 4
+ghost1: 4 8
+STEP88
+pacman: 7 9
+ghost0: 3 4
+ghost1: 3 8
+STEP89
+pacman: 7 9
+ghost0: 3 3
+ghost1: 3 8
+STEP90
+pacman: 7 9
+ghost0: 3 3
+ghost1: 3 7
+STEP91
+pacman: 7 9
+ghost0: 3 2
+ghost1: 3 7
+STEP92
+pacman: 7 9
+ghost0: 3 2
+ghost1: 3 8
+STEP93
+pacman: 7 10
+ghost0: 3 2
+ghost1: 3 8
+STEP94
+pacman: 7 10
+ghost0: 3 3
+ghost1: 3 8
+STEP95
+pacman: 7 10
+ghost0: 3 3
+ghost1: 2 8
+STEP96
+pacman: 7 10
+ghost0: 3 3
+ghost1: 2 8
+STEP97
+pacman: 7 10
+ghost0: 3 4
+ghost1: 2 8
+STEP98
+pacman: 7 10
+ghost0: 3 4
+ghost1: 2 9
+STEP99
+pacman: 6 10
+ghost0: 3 4
+ghost1: 2 9
+STEP100
+pacman: 6 10
+ghost0: 3 5
+ghost1: 2 9
+STEP101
+pacman: 6 10
+ghost0: 3 5
+ghost1: 2 10
+STEP102
+pacman: 5 10
+ghost0: 3 5
+ghost1: 2 10
+STEP103
+pacman: 5 10
+ghost0: 3 6
+ghost1: 2 10
+STEP104
+pacman: 5 10
+ghost0: 3 6
+ghost1: 3 10
+STEP105
+pacman: 5 10
+ghost0: 3 7
+ghost1: 3 10
+STEP106
+pacman: 5 10
+ghost0: 3 7
+ghost1: 2 10
+STEP107
+pacman: 5 10
+ghost0: 3 8
+ghost1: 2 10
+STEP108
+pacman: 5 10
+ghost0: 3 8
+ghost1: 3 10
+STEP109
+pacman: 5 9
+ghost0: 3 8
+ghost1: 3 10
+STEP110
+pacman: 5 9
+ghost0: 3 9
+ghost1: 3 10
+STEP111
+pacman: 5 9
+ghost0: 3 9
+ghost1: 4 10
+STEP112
+pacman: 5 9
+ghost0: 3 10
+ghost1: 4 10
+STEP113
+pacman: 5 9
+ghost0: 3 10
+ghost1: 5 10
+STEP114
+pacman: 6 9
+ghost0: 3 10
+ghost1: 5 10
+STEP115
+pacman: 6 9
+ghost0: 4 10
+ghost1: 5 10
+STEP116
+pacman: 6 9
+ghost0: 5 10
+ghost1: 5 10
+STEP117
+pacman: 6 9
+ghost0: 5 10
+ghost1: 4 10
+STEP118
+pacman: 7 9
+ghost0: 5 10
+ghost1: 4 10
+STEP119
+pacman: 7 9
+ghost0: 6 10
+ghost1: 4 10
+STEP120
+pacman: 8 9
+ghost0: 6 10
+ghost1: 4 10
+STEP121
+pacman: 8 9
+ghost0: 7 10
+ghost1: 4 10
+STEP122
+pacman: 8 9
+ghost0: 7 10
+ghost1: 3 10
+STEP123
+pacman: 8 8
+ghost0: 7 10
+ghost1: 3 10
+STEP124
+pacman: 8 8
+ghost0: 7 9
+ghost1: 3 10
+STEP125
+pacman: 8 8
+ghost0: 7 8
+ghost1: 3 10
+STEP126
+pacman: 8 8
+ghost0: 7 8
+ghost1: 3 9
+STEP127
+pacman: 7 8
+ghost0: 7 8
+ghost1: 3 9

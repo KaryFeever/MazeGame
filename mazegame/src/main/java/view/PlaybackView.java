@@ -118,6 +118,13 @@ public class PlaybackView extends Scene{
         });
     }
 
+    
+    /** 
+     * @param replay
+     * @param mode
+     * @param from
+     * @param appController
+     */
     private void StartReplay(Replay replay, int mode, int from, AppController appController) {
         final int WIDTH = 1024;
         final int HEIGHT = 960;
@@ -128,7 +135,10 @@ public class PlaybackView extends Scene{
         ReplayView replayView = new ReplayView(GameCanvas, HUDCanvas, replayController);
         
         VBox vbox = new VBox(HUDCanvas, GameCanvas);
+        VBox vboxButtons = new VBox(); // Vbox for buttons
+        vboxButtons.setSpacing(10);
         Button exit = new Button("Exit");
+        exit.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
         exit.setOnAction(event -> {
             appController.setScene(3);
         });
@@ -143,16 +153,13 @@ public class PlaybackView extends Scene{
                 replayController.previous();
                 replayView.draw();
             });
-    
-            HBox hbox = new HBox(previous, next, exit);
-            vbox.getChildren().add(hbox);
+            vboxButtons.getChildren().addAll(previous, next, exit);
         }
         else {
             vbox.getChildren().add(exit);
         }
         
         if(from == 0) {
-    
             replay.setIndex(-1);
         } else {
             replayController.findKeyStep();
@@ -162,7 +169,9 @@ public class PlaybackView extends Scene{
             replay.getGame().getPacMan().setKeyFlag(true);
         }
         replayView.draw();
-        StackPane root = new StackPane(vbox);
+        VBox vboxButtonsWrapper = new VBox(vboxButtons);
+        vboxButtonsWrapper.setAlignment(Pos.CENTER);
+        HBox root = new HBox(vbox, vboxButtonsWrapper);
         root.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root, 1024, 960);
     
@@ -184,10 +193,7 @@ public class PlaybackView extends Scene{
                     return null;
                 }
             };
-    
             new Thread(task).start();
-            
-            
         }
     }
 

@@ -16,6 +16,10 @@ import model.game_object.Target;
 import model.terrain.Field;
 import model.terrain.Wall;
 
+/**
+ * MapParser class is responsible for parsing and creating Map instances
+ * from files stored in the specified directory.
+ */
 public class MapParser {
     private int rows;
     private int cols;
@@ -25,7 +29,10 @@ public class MapParser {
     private ArrayList<Map> maps = new ArrayList<Map>();
     private File directory = new File("data/maps");
 
-
+    /**
+     * Reads all map files in the configured directory and generates a list
+     * of Map objects.
+     */
     public void configureMaps() {
         maps.clear();
         File[] files = directory.listFiles();
@@ -38,15 +45,16 @@ public class MapParser {
                     map = null;
                     rowIndex = 0;
                 }
-                
             }
         }
     }
 
     /**
-     * 
-     * @param line
-     * @return
+     * Parses map sizes (rows and columns) from the given input line and creates
+     * a new Map instance with these dimensions.
+     *
+     * @param line A string containing the map sizes (rows and columns).
+     * @return True if map sizes were successfully parsed and a Map instance was created, false otherwise.
      */
     private boolean parseSizes(String line) {
         Scanner scanner = new Scanner(line);
@@ -66,12 +74,13 @@ public class MapParser {
     }
 
     /**
-     * 
-     * @param line
-     * @return
+     * Parses a line from the input file and creates Terrain objects and game objects
+     * according to the characters in the line.
+     *
+     * @param line A string containing the map objects for a row of the map.
+     * @return True if the line was successfully parsed and the objects were created, false otherwise.
      */
     private boolean parseFieldLine(String line) {
-        
         if(line.length() != cols) {
             return false;
         }
@@ -107,16 +116,15 @@ public class MapParser {
             }
             map.setMapField(rowIndex, col, newTerrain);
         }
-
         scanner.close();
-
         return true;
     }
 
     /**
-     * 
-     * @param file
-     * @return
+     * Parses a map file to create a Map object representing the game map.
+     *
+     * @param file The map file to be parsed.
+     * @return The Map object representing the parsed map file.
      */
     public Map parseMap(File file) {
         Scanner scanner;
@@ -135,21 +143,29 @@ public class MapParser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        
         return map;
     }
 
+    /**
+     * Returns a specific Map object from the list of parsed maps.
+     *
+     * @param mapIndex The index of the desired Map object in the list.
+     * @return The Map object at the specified index.
+     */
     public Map getMap(int mapIndex) {
         return this.maps.get(mapIndex);
     }
 
+    /**
+     * Returns a list of map names extracted from the list of Map objects.
+     *
+     * @return The list of map names.
+     */
     public List<String> getMapNames() {
         List<String> mapNames = new ArrayList<>();
         for(Map map : maps) {
             mapNames.add(map.getName());
         }
-
         return mapNames;
     }
-    
 }
