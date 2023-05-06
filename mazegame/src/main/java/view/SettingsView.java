@@ -13,11 +13,10 @@ import javafx.scene.layout.VBox;
 
 public class SettingsView extends Scene {
     public SettingsView(int difficultyLevel, AppController appController) {
-        super(new VBox(), 1024, 720); // create a new VBox with a width of 400 and height of 300
+        super(new VBox(), 1024, 720);
         
         // Difficulty mode section
         Label difficultyModeLabel = new Label("Difficulty mode");
-
 
         RadioButton easyButton = new RadioButton("Easy");
         RadioButton mediumButton = new RadioButton("Medium");

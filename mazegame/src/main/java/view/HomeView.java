@@ -22,12 +22,11 @@ public class HomeView  extends Scene{
         settingsButton.setOnAction(event -> {
             appController.setScene(2);
         });
-        // add SetOnAction()
-            // Call setScene(settingsMarker) from App.java
-            // Scene settingsMarker = new Scene(new VBox(), 1024, 720);
-            // app.setScene(settingsMarker);
 
         Button playbackButton = new Button("Playback");
+        playbackButton.setOnAction(event -> {
+            appController.setScene(3);
+        });
 
         Button exitButton = new Button("Exit");
         exitButton.setStyle("-fx-background-color: #c3522d; -fx-text-fill: #FFFFFF;");
