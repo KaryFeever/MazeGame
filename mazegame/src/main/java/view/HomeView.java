@@ -1,3 +1,7 @@
+// Project Title: IJA 2022/23: Pac-Man Game Design and Implementation
+// Autors: Maksim Naumenko  (xnaume01)
+//         Tatiana Fedorova (xfedor14)
+
 package view;
 
 import controller.AppController;
@@ -11,7 +15,7 @@ import javafx.scene.layout.VBox;
  * HomeView class represents the home screen of the application.
  */
 public class HomeView  extends Scene{
-    
+
     /**
      * Constructor for HomeView.
      *

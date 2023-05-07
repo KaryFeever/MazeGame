@@ -1,3 +1,7 @@
+// Project Title: IJA 2022/23: Pac-Man Game Design and Implementation
+// Autors: Maksim Naumenko  (xnaume01)
+//         Tatiana Fedorova (xfedor14)
+
 package controller;
 
 import javafx.scene.Scene;
