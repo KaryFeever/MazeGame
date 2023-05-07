@@ -5,7 +5,6 @@
 package view;
 
 import controller.AppController;
-import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

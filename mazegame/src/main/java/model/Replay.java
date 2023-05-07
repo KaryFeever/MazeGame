@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import interfaces.GameObject.Directions;
-
 /**
  * Replay class to store and manage a replay of a game.
  */

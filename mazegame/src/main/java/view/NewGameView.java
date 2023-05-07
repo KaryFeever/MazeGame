@@ -8,7 +8,6 @@ import controller.AppController;
 import controller.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -18,7 +17,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.Game;
 import model.Map;
 
@@ -92,9 +90,6 @@ public class NewGameView extends Scene {
      * @param appController The application's main controller object.
      */
     private void startGame(Map map, AppController appController) {
-        final int WIDTH = 1024;
-        final int HEIGHT = 960;
-    
         Game game = new Game(map);
         game.getPacMan().setLives(appController.getPacManLives());
         GameController gameController = new GameController(game, appController);

@@ -85,7 +85,6 @@ public class ReplayView {
      * Draws the lives and key status on the HUD canvas.
      */
     private void drawLives() {
-        Image livesImage = new Image(LIVES_IMAGE_PATH);
         HBox livesBox = new HBox();
         for (int i = 0; i < controller.getReplay().getGame().getPacMan().getLives(); i++) {
             Image lifeImage = new Image(LIVES_IMAGE_PATH);

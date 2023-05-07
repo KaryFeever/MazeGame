@@ -32,7 +32,6 @@ public class GameView {
     private static final String LIVES_IMAGE_PATH = "/heart.png";
     private static final int SPRITE_SIZE = 64;
     private int ghostsSpeed = 1;
-    private Canvas canvas;
     private GraphicsContext graphicsContext;
     private GraphicsContext hudGraphicsContext;
     private Map map;
@@ -48,7 +47,6 @@ public class GameView {
      * @param controller The GameController object.
      */
     public GameView(Canvas canvas, Canvas HUDCanvas, Map map, GameController controller) {
-        this.canvas = canvas;
         this.map = map;
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.hudGraphicsContext = HUDCanvas.getGraphicsContext2D();
@@ -90,7 +88,6 @@ public class GameView {
      * Draws the Pac-Man lives in the HUD.
      */
     private void drawLives() {
-        Image livesImage = new Image(LIVES_IMAGE_PATH);
         HBox livesBox = new HBox();
         for (int i = 0; i < controller.getPacManLives(); i++) {
             Image lifeImage = new Image(LIVES_IMAGE_PATH);

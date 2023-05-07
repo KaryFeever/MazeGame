@@ -20,9 +20,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.Replay;
 
 /**
@@ -138,8 +136,6 @@ public class PlaybackView extends Scene{
      * @param appController The AppController instance to interact with the application.
      */
     private void StartReplay(Replay replay, int mode, int from, AppController appController) {
-        final int WIDTH = 1024;
-        final int HEIGHT = 960;
         ReplayController replayController = new ReplayController(replay, appController);
         Canvas GameCanvas = new Canvas(800, 800);
         Canvas HUDCanvas = new Canvas(800, 64);
