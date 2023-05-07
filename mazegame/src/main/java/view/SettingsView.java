@@ -11,12 +11,22 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * This class represents a SettingsView that displays a settings menu for the user
+ * to configure the game's difficulty.
+ */
 public class SettingsView extends Scene {
     private AppController appController;
     RadioButton easyButton;
     RadioButton mediumButton;
     RadioButton hardButton;
     RadioButton insaneButton;
+
+    /**
+     * Creates a SettingsView object for configuring game difficulty.
+     *
+     * @param appController The AppController instance to interact with the game state.
+     */
     public SettingsView(AppController appController) {
         super(new VBox(), 1024, 720);
         this.appController = appController;
@@ -28,7 +38,6 @@ public class SettingsView extends Scene {
         mediumButton = new RadioButton("Medium");
         hardButton = new RadioButton("Hard");
         insaneButton = new RadioButton("Insane");
-
 
         ToggleGroup difficultyModeGroup = new ToggleGroup();
         easyButton.setToggleGroup(difficultyModeGroup);
@@ -45,7 +54,6 @@ public class SettingsView extends Scene {
         difficultyModeVBox.setSpacing(20);
         difficultyModeVBox.setAlignment(Pos.CENTER);
         difficultyModeVBox.setPadding(new Insets(0, 0, 50, 0));
-
 
         // Create buttons
         Button saveButton = new Button("Save");
@@ -84,9 +92,11 @@ public class SettingsView extends Scene {
         vbox.getChildren().addAll(difficultyModeLabel, easyButton, mediumButton, hardButton, insaneButton, buttonsBox);
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);
-
     }
 
+    /**
+     * Sets the selected difficulty RadioButton according to the current difficulty level.
+     */
     private void setSelected() {
         switch(appController.getDifficultyLevel()) {
             case 0:

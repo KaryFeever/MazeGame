@@ -18,9 +18,17 @@ import javafx.stage.Stage;
 import model.Game;
 import model.Map;
 
+/**
+ * NewGameView class represents the view to start a new game.
+ */
 public class NewGameView extends Scene {
     private int mapIndex = 0;
 
+    /**
+     * Constructor for NewGameView.
+     *
+     * @param appController The application's main controller object.
+     */
     public NewGameView(AppController appController) {
         super(new VBox(), 1024, 720);
         VBox startLayout = (VBox) getRoot();
@@ -33,7 +41,6 @@ public class NewGameView extends Scene {
         // Create a ListView with sample map names
         ListView<String> mapListView = new ListView<>();
         mapListView.getItems().addAll(appController.getMapParser().getMapNames());
-
         mapListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         // Create a ScrollPane and set the ListView as its content
@@ -74,10 +81,11 @@ public class NewGameView extends Scene {
         });
     }
 
-    
-    /** 
-     * @param map
-     * @param appController
+    /**
+     * Starts the game based on the selected map and application controller settings.
+     * 
+     * @param map           The selected map.
+     * @param appController The application's main controller object.
      */
     private void startGame(Map map, AppController appController) {
         final int WIDTH = 1024;
@@ -94,15 +102,12 @@ public class NewGameView extends Scene {
         gameView.draw();
     
         VBox vbox = new VBox(HUDCanvas, GameCanvas);
-    
         StackPane root = new StackPane(vbox);
         root.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root, 1024, 960);
-    
         scene.setOnKeyPressed(gameController::handleKeyPress);
     
         gameView.updateGameView();
         appController.setScene(scene);
     }
-    
 }

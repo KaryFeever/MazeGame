@@ -32,7 +32,7 @@ public class Wall implements Terrain {
     /**
      * Get the list of game objects on the wall.
      *
-     * @return List<GameObject> - always returns null as the wall cannot contain any game objects.
+     * @return {@code List<GameObject>} - always returns null as the wall cannot contain any game objects.
      */
     @Override
     public List<GameObject> getObject() {

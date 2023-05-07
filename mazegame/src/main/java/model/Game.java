@@ -74,7 +74,7 @@ public class Game {
     /**
      * Gets the list of Ghost objects in the game.
      *
-     * @return List<Ghost> - the list of ghosts in the game.
+     * @return {@code List<Ghost>} - the list of ghosts in the game.
      */
     public List<Ghost> getGhosts() {
         return this.ghosts;

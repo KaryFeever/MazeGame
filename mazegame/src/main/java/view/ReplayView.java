@@ -14,6 +14,9 @@ import model.game_object.PacMan;
 import model.game_object.Target;
 import model.terrain.Wall;
 
+/**
+ * This class represents a ReplayView responsible for rendering the state of a replayed game.
+ */
 public class ReplayView {
     private static final String WALL_IMAGE_PATH = "/wall.jpg";
     private static final String FIELD_IMAGE_PATH = "/field.jpg";
@@ -28,6 +31,13 @@ public class ReplayView {
     private GraphicsContext graphicsContext;
     private GraphicsContext hudGraphicsContext;
 
+    /**
+     * Creates a ReplayView object for rendering the state of a replayed game.
+     *
+     * @param canvas The main game canvas for drawing game objects.
+     * @param HUDCanvas The canvas for drawing the HUD, such as lives and key status.
+     * @param controller The ReplayController instance to interact with the replayed game state.
+     */
     public ReplayView(Canvas canvas, Canvas HUDCanvas, ReplayController controller) {
         this.controller = controller;
         this.map = controller.getReplay().getGame().getMap();
@@ -35,7 +45,9 @@ public class ReplayView {
         this.hudGraphicsContext = HUDCanvas.getGraphicsContext2D();
     }
 
-
+    /**
+     * Draws the current state of the game objects on the canvas.
+     */
     public void draw() {
         for(int row = 0; row < map.getRows(); row++) {
             for(int col = 0; col < map.getCols(); col++) {
@@ -56,8 +68,7 @@ public class ReplayView {
                             }
                             if(object.getClass() == Ghost.class) {
                                 graphicsContext.drawImage(new Image(GHOST_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
-                            }
-                            
+                            } 
                         }
                     }
                 }
@@ -66,6 +77,9 @@ public class ReplayView {
         drawLives();
     }
 
+    /**
+     * Draws the lives and key status on the HUD canvas.
+     */
     private void drawLives() {
         Image livesImage = new Image(LIVES_IMAGE_PATH);
         HBox livesBox = new HBox();
@@ -80,6 +94,5 @@ public class ReplayView {
         if(controller.getReplay().getGame().getPacMan().isKeyFlag()) {
             hudGraphicsContext.drawImage(new Image(KEY_IMAGE_PATH), 200, 0, SPRITE_SIZE, SPRITE_SIZE);
         }
-        
     }
 }

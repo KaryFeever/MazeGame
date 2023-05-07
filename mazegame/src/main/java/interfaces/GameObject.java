@@ -14,9 +14,24 @@ public interface GameObject {
      * (left, right, up, down) with associated vertical and horizontal move values.
      */
     public enum Directions{
+        /**
+         * Represents moving left.
+         */
         LEFT(0, -1),
+
+        /**
+         * Represents moving right.
+         */
         RIGHT(0, 1),
+
+        /**
+         * Represents moving up.
+         */
         UP(-1, 0),
+
+        /**
+         * Represents moving down.
+         */
         DOWN(1, 0);
 
         private int verticalMove;

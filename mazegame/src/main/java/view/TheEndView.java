@@ -10,9 +10,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * This class represents a TheEndView that displays a message upon the end of the game,
+ * providing options for the user to start a new game or exit.
+ */
 public class TheEndView extends Scene{
     Label difficultyModeLabel = new Label();
     Button newGameButton;
+
+    /**
+     * Creates a TheEndView object that shows the end of the game message and options.
+     *
+     * @param appController The AppController instance to interact with the game state.
+     */
     public TheEndView(AppController appController) {
         super(new VBox(), 1024, 720);
         Font font =  Font.font("Roboto", FontWeight.EXTRA_BOLD, 64);
@@ -41,9 +51,10 @@ public class TheEndView extends Scene{
         vbox.setSpacing(20);
     }
     
-    
-    /** 
-     * @param label
+    /**
+     * Sets the text for the end of the game message label.
+     *
+     * @param label The text to display in the end of the game message label.
      */
     public void setLabel(String label) {
         difficultyModeLabel.setText(label);

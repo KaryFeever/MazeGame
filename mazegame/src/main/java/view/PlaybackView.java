@@ -21,10 +21,19 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Replay;
 
+/**
+ * This class represents a PlaybackView scene that allows the user to select and play back recorded games.
+ */
 public class PlaybackView extends Scene{
     private int replayIndex = 0;
     ListView<String> mapListView = new ListView<>();
     AppController appController;
+
+    /**
+     * Creates a PlaybackView layout to display the list of recorded games.
+     * 
+     * @param appController The AppController instance to interact with the application.
+     */
     public PlaybackView(AppController appController) {
         super(new VBox(), 1024, 720);
         this.appController = appController;
@@ -37,9 +46,7 @@ public class PlaybackView extends Scene{
         playbackLayout.setAlignment(Pos.CENTER);
 
         // Create a ListView with sample map names
-        
         mapListView.getItems().addAll(appController.getLogParser().getReplayNames());
-        // mapListView.getItems().addAll(logParser.getReplayNames());
         mapListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         // Create a ScrollPane and set the ListView as its content
@@ -118,12 +125,13 @@ public class PlaybackView extends Scene{
         });
     }
 
-    
-    /** 
-     * @param replay
-     * @param mode
-     * @param from
-     * @param appController
+    /**
+     * Starts a replay of the selected game.
+     * 
+     * @param replay The replay instance to be played back.
+     * @param mode The playback mode: 0 for step-by-step, 1 for fast.
+     * @param from The starting point of the replay: 0 for the beginning, 1 for the end.
+     * @param appController The AppController instance to interact with the application.
      */
     private void StartReplay(Replay replay, int mode, int from, AppController appController) {
         final int WIDTH = 1024;
@@ -197,9 +205,11 @@ public class PlaybackView extends Scene{
         }
     }
 
+    /**
+     * Updates the list of recorded games displayed in the ListView.
+     */
     public void updateReplayViews() {
         mapListView.getItems().clear();
         mapListView.getItems().addAll(appController.getLogParser().getReplayNames());
     }
-    
 }

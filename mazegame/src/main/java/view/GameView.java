@@ -15,6 +15,9 @@ import model.game_object.PacMan;
 import model.game_object.Target;
 import model.terrain.Wall;
 
+/**
+ * GameView class for rendering the game's graphical elements on a canvas.
+ */
 public class GameView {
     private static final String WALL_IMAGE_PATH = "/wall.jpg";
     private static final String FIELD_IMAGE_PATH = "/field.jpg";
@@ -32,6 +35,14 @@ public class GameView {
     private GameController controller;
     private AnimationTimer animationTimer;
 
+    /**
+     * Constructor for GameView.
+     *
+     * @param canvas The canvas on which the game is rendered.
+     * @param HUDCanvas The canvas for rendering the heads-up display (HUD) elements.
+     * @param map The game's map object.
+     * @param controller The GameController object.
+     */
     public GameView(Canvas canvas, Canvas HUDCanvas, Map map, GameController controller) {
         this.canvas = canvas;
         this.map = map;
@@ -40,6 +51,9 @@ public class GameView {
         this.controller = controller;
     }
 
+    /**
+     * Draws the game objects on the canvas.
+     */
     public void draw() {
         for(int row = 0; row < map.getRows(); row++) {
             for(int col = 0; col < map.getCols(); col++) {
@@ -61,7 +75,6 @@ public class GameView {
                             if(object.getClass() == Ghost.class) {
                                 graphicsContext.drawImage(new Image(GHOST_IMAGE_PATH), col*SPRITE_SIZE, row*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
                             }
-                            
                         }
                     }
                 }
@@ -69,6 +82,9 @@ public class GameView {
         }
     }
 
+    /**
+     * Draws the Pac-Man lives in the HUD.
+     */
     private void drawLives() {
         Image livesImage = new Image(LIVES_IMAGE_PATH);
         HBox livesBox = new HBox();
@@ -83,13 +99,14 @@ public class GameView {
         if(controller.getKeyFlag()) {
             hudGraphicsContext.drawImage(new Image(KEY_IMAGE_PATH), 200, 0, SPRITE_SIZE, SPRITE_SIZE);
         }
-        
     }
 
+    /**
+     * Updates the game view by redrawing objects on the canvas and updating the HUD.
+     */
     public void updateGameView() {
         final long[] startTime = { System.nanoTime() };
         long INTERVAL = 200000000 / ghostsSpeed; // 50 milliseconds
-
 
         animationTimer = new AnimationTimer() {
             @Override
@@ -110,10 +127,11 @@ public class GameView {
         };
         animationTimer.start();
     }
-
     
-    /** 
-     * @param ghostsSpeed
+    /**
+     * Sets the speed of the ghosts in the game.
+     *
+     * @param ghostsSpeed The speed value for ghosts.
      */
     public void setGhostsSpeed(int ghostsSpeed) {
         this.ghostsSpeed = ghostsSpeed;

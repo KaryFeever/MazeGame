@@ -7,8 +7,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * HomeView class represents the home screen of the application.
+ */
 public class HomeView  extends Scene{
+    
+    /**
+     * Constructor for HomeView.
+     *
+     * @param appController The application's main controller object.
+     */
     public HomeView(AppController appController) {
         super(new VBox(), 1024, 720); // create a new VBox with a width of 400 and height of 300
 
@@ -40,7 +48,6 @@ public class HomeView  extends Scene{
 
         // center the VBox in the scene
         vbox.setAlignment(Pos.CENTER);
-
         vbox.setSpacing(20); // Add spacing between buttons
     }
 }

@@ -36,7 +36,7 @@ public class Field implements Terrain {
     /**
      * Get the list of game objects on the field.
      *
-     * @return List<GameObject> - the list of game objects on the field.
+     * @return {@code List<GameObject>} - the list of game objects on the field.
      */
     @Override
     public List<GameObject> getObject() {

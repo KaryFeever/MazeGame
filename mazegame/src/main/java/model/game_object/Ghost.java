@@ -18,12 +18,12 @@ public class Ghost implements GameObject {
     private int changeDirection = new Random().nextInt(4) + 1;
 
     /**
-     * Constructs a new Ghost instance with the specified initial parameters.
+     * Constructs a Ghost object with the specified map, row, column, and direction.
      *
-     * @param map       The game map the ghost is part of.
-     * @param row       The initial row position of the ghost.
-     * @param col       The initial column position of the ghost.
-     * @param direction The initial movement direction of the ghost.
+     * @param map       the map where the Ghost is placed
+     * @param row       the row of the Ghost's initial position
+     * @param col       the column of the Ghost's initial position
+     * @param direction the initial direction of the Ghost
      */
     public Ghost(Map map, int row, int col, Directions direction) {
         this.map = map;
@@ -38,7 +38,7 @@ public class Ghost implements GameObject {
      * @param dir The direction to check for possible movement.
      * @return true if the ghost can move in the specified direction, false otherwise.
      */
-     @Override
+    @Override
     public boolean canMove(Directions dir) {
         int rowMove = 0;
         int colMove = 0;
@@ -63,10 +63,11 @@ public class Ghost implements GameObject {
     }
 
     /**
-     * Moves the ghost in the specified direction if possible.
+     * Attempts to move the Ghost in the specified direction.
+     * If the move is successful, returns true, otherwise, returns false.
      *
-     * @param dir The direction to move the ghost in.
-     * @return true if the ghost moved in the specified direction, false otherwise.
+     * @param dir the direction to move the Ghost
+     * @return true if the Ghost moved successfully, false otherwise
      */
     @Override
     public boolean move(Directions dir) {
@@ -103,11 +104,11 @@ public class Ghost implements GameObject {
     }
 
     /**
-     * Moves the ghost to the specified row and column.
+     * Moves the Ghost to the specified row and column.
      *
-     * @param row The row to move the ghost to.
-     * @param col The column to move the ghost to.
-     * @return true if the ghost was successfully moved to the specified position.
+     * @param row the new row for the Ghost
+     * @param col the new column for the Ghost
+     * @return true if the move is successful
      */
     public boolean move(int row, int col) {
         map.getMapField(this.row, this.col).removeObject(this);
@@ -138,18 +139,18 @@ public class Ghost implements GameObject {
     }
 
     /**
-     * Returns the current direction of the ghost.
+     * Gets the current direction of the Ghost.
      *
-     * @return The current movement direction of the ghost.
+     * @return the current direction of the Ghost
      */
     public Directions getDirection() {
         return this.direction;
     }
 
     /**
-     * Sets the movement direction of the ghost.
+     * Sets the direction of the Ghost.
      *
-     * @param direction The new movement direction of the ghost.
+     * @param direction the new direction for the Ghost
      */
     public void setDirection(Directions direction) {
         this.direction = direction;
